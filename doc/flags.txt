@@ -1,0 +1,26 @@
+--Flags--
+# TBD
+0 padding?
+- padded on the left with zeroes
++ always display the sign of a number
+' ' TBD
+
+--Precision--
+Idk
+
+--Conversions--
+s			char array (string)
+S -> ls			wide chars
+p			pointer printed in hexa
+d, i			int
+D			TBD (not even in the fucking man, likely long int)
+-o, u ,x,X
+o			unsigned int, converted to unsigned octal
+u			unsigned int, converted to unsigned decimal
+x, X			unsigned int, converted to unsigned hexadecimal
+c			char
+C -> lc			unicode
+
+--Return val--
+The length of the printed string for printf, the string for vprintf
+= It might be a good idea to code vprintf and strlen it
