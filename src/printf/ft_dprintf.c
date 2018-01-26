@@ -6,10 +6,19 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:41:16 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/26 18:41:32 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/01/26 19:15:01 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_dprintf(int fd, const char *format, ...);
+int		ft_dprintf(int fd, const char *format, ...)
+{
+	int		res;
+	va_list	ap;
+
+	va_start(ap, format);
+	res = ft_vdprintf(fd, format, ap);
+	va_end(ap);
+	return res;
+}
