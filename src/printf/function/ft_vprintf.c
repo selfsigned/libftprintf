@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dprintf.c                                       :+:      :+:    :+:   */
+/*   ft_vprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/26 18:41:16 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/26 19:15:01 by xperrin          ###   ########.fr       */
+/*   Created: 2018/01/26 18:42:32 by xperrin           #+#    #+#             */
+/*   Updated: 2018/01/29 09:24:00 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "printf.h"
 
-int		ft_dprintf(int fd, const char *format, ...)
+int		ft_vprintf(const char *format, va_list ap)
 {
-	int		res;
-	va_list	ap;
-
-	va_start(ap, format);
-	res = ft_vdprintf(fd, format, ap);
-	va_end(ap);
-	return res;
+	return(ft_vdprintf(0, format, ap));
 }

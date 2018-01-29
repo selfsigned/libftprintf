@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 20:10:52 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/26 18:01:47 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/01/29 09:21:01 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 
 # include "get_next_line.h"
-# include "ft_printf.h"
+# include "printf.h"
 
 # define MAXIMUM_INT 2147483647
 # define MINIMUM_INT -2147483648

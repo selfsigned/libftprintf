@@ -6,25 +6,27 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/01/26 18:44:17 by xperrin          ###   ########.fr        #
+#    Updated: 2018/01/29 09:45:18 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 SONAME = $(NAME:.a=.so)
+DNAME = $(NAME)
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 INCDIR = includes
-INCFILES = libft.h get_next_line.h ft_printf.h
+INCFILES = libft.h get_next_line.h printf.h
 INCFULL = $(addprefix $(INCDIR)/, $(INCFILES))
 INC = $(addprefix -I, $(INCDIR))
+SRCDIR = src
 
 # Source Files
-MEMDIR = src/memory
+MEMDIR = $(SRCDIR)/memory
 FT_MEM = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	ft_memchr.c ft_memcmp.c ft_memalloc.c ft_memdel.c
 
-STRDIR = src/string
+STRDIR = $(SRCDIR)/string
 FT_STR = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 	ft_strcat.c ft_strncat.c ft_strlcat.c ft_strchr.c ft_strrchr.c \
 	ft_strstr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
@@ -37,22 +39,24 @@ FT_STR = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 	ft_strtrim.c ft_strsplit.c ft_itoa.c \
 	ft_cntword.c ft_strrlen.c ft_strndup.c ft_strdeltab.c
 
-DISPDIR = src/display
+DISPDIR = $(SRCDIR)/display
 FT_DISP = ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
-LSTDIR = src/list
+LSTDIR = $(SRCDIR)/list
 FT_LST = ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c \
 	ft_lstiter.c ft_lstmap.c
 
-MATHDIR = src/math
+MATHDIR = $(SRCDIR)/math
 FT_MATH = ft_cntdigit.c ft_pow.c ft_sqrt.c
 
-GNLDIR = src/gnl
+GNLDIR = $(SRCDIR)/gnl
 GNL = get_next_line.c
 
-PRINTFDIR = src/printf
-PRINTF = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
+PRINTFP = $(SRCDIR)/printf
+PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse
+PRINTF_FUN = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
+PRINTF = $(PRINTF_FUN)
 
 OBJDIR = obj
 VPATH = $(MEMDIR):$(STRDIR):$(DISPDIR):$(LSTDIR):$(MATHDIR):\
@@ -61,10 +65,10 @@ SRC = $(FT_MEM) $(FT_STR) $(FT_DISP) $(FT_LST) $(FT_MATH) $(GNL) $(PRINTF)
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 # Dude colors lmao
-GOOD=\x1b[32;01m
-AIGHT=\x1b[33;01m
-WARN=\x1b[31;01m
-NOCOLOR=\x1b[0m
+GOOD=\033[1;32m
+AIGHT=\033[1;33m
+WARN=\033[1;31m
+NOCOLOR=\033[0m
 ifeq ($(shell uname), Linux)
 	ECHO = echo -e
 else
@@ -78,12 +82,13 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(AR) rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@$(ECHO) "$(GOOD)[LIBFT]Archived library updated.$(NOCOLOR)"
+	@$(ECHO) "$(GOOD)[$(DNAME)]Archived library updated.$(NOCOLOR)"
 
 $(SONAME): CFLAGS += -fPIC
+$(SONAME): DNAME = $(SONAME)
 $(SONAME): $(OBJ)
 	@$(CC) -shared -o $(SONAME) $(OBJ)
-	@$(ECHO) "$(GOOD)[LIBFT]Shared object updated.$(NOCOLOR)"
+	@$(ECHO) "$(GOOD)[$(DNAME)]Shared object updated.$(NOCOLOR)"
 
 so: $(SONAME)
 
@@ -91,7 +96,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: %.c $(INCFULL) | $(OBJDIR)
-	@$(ECHO) "$(GOOD)[LIBFT]$(AIGHT)[$(dir $<)]$(NOCOLOR)$(notdir $(@:.o=))"
+	@$(ECHO) "$(GOOD)[$(DNAME)]$(AIGHT)[$(dir $<)]$(NOCOLOR)$(notdir $(@:.o=))"
 	@$(CC) $(CFLAGS) -c -o $@ $< $(INC)
 
 # Cleanup
