@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/01/29 10:03:50 by xperrin          ###   ########.fr        #
+#    Updated: 2018/01/29 15:22:53 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ DNAME = $(NAME)
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 INCDIR = includes
-INCFILES = libft.h get_next_line.h printf.h
+PRINTFINC = printf.h printf_helpers.h printf_conv.h
+INCFILES = libft.h get_next_line.h $(PRINTFINC)
 INCFULL = $(addprefix $(INCDIR)/, $(INCFILES))
 INC = $(addprefix -I, $(INCDIR))
 SRCDIR = src
@@ -92,7 +93,7 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: %.c $(INCFULL) | $(OBJDIR)
 	@printf "$(GOOD)[$(DNAME)]$(AIGHT)[$(dir $<)]$(NOCOLOR)$(notdir $(@:.o=))\n"
-	@$(CC) $(CFLAGS) -c -o $@ $< $(INC)
+	$(CC) $(CFLAGS) -c -o $@ $< $(INC)
 
 # Cleanup
 clean:
