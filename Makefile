@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/01/29 09:45:18 by xperrin          ###   ########.fr        #
+#    Updated: 2018/01/29 10:03:50 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,11 +69,6 @@ GOOD=\033[1;32m
 AIGHT=\033[1;33m
 WARN=\033[1;31m
 NOCOLOR=\033[0m
-ifeq ($(shell uname), Linux)
-	ECHO = echo -e
-else
-	ECHO = echo
-endif
 
 .PHONY: all so clean fclean re
 
@@ -82,13 +77,13 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(AR) rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@$(ECHO) "$(GOOD)[$(DNAME)]Archived library updated.$(NOCOLOR)"
+	@printf "$(GOOD)[$(DNAME)]Archived library updated.$(NOCOLOR)\n"
 
 $(SONAME): CFLAGS += -fPIC
 $(SONAME): DNAME = $(SONAME)
 $(SONAME): $(OBJ)
 	@$(CC) -shared -o $(SONAME) $(OBJ)
-	@$(ECHO) "$(GOOD)[$(DNAME)]Shared object updated.$(NOCOLOR)"
+	@printf "$(GOOD)[$(DNAME)]Shared object updated.$(NOCOLOR)\n"
 
 so: $(SONAME)
 
@@ -96,16 +91,16 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: %.c $(INCFULL) | $(OBJDIR)
-	@$(ECHO) "$(GOOD)[$(DNAME)]$(AIGHT)[$(dir $<)]$(NOCOLOR)$(notdir $(@:.o=))"
+	@printf "$(GOOD)[$(DNAME)]$(AIGHT)[$(dir $<)]$(NOCOLOR)$(notdir $(@:.o=))\n"
 	@$(CC) $(CFLAGS) -c -o $@ $< $(INC)
 
 # Cleanup
 clean:
 	@$(RM) -r $(OBJDIR)
-	@$(ECHO) "$(GOOD)[LIBFT]$(WARN)[CLEAN]$(NOCOLOR)Object directory removed"
+	@printf "$(GOOD)[LIBFT]$(WARN)[CLEAN]$(NOCOLOR)Object directory removed\n"
 
 fclean: clean
 	@$(RM) $(NAME) $(SONAME)
-	@$(ECHO) "$(GOOD)[LIBFT]$(WARN)[CLEAN]$(NOCOLOR)Archive removed"
+	@printf "$(GOOD)[LIBFT]$(WARN)[CLEAN]$(NOCOLOR)Archive removed\n"
 
 re: fclean all

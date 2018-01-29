@@ -1,4 +1,5 @@
 # Libft/GNL
+[![Build Status](https://travis-ci.com/xperrin/libftprintf.svg?token=JKEswLKAuxBcL3YjR9AE&branch=master)](https://travis-ci.com/xperrin/libftprintf)
 My libft and GNL projects as a single lib
 
 # GNL
