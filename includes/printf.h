@@ -6,25 +6,34 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 17:57:28 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/29 15:04:30 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/01/29 16:28:00 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRINTF_H
 # define PRINTF_H
 
-#include "libft.h"
-#include "printf_conv.h"
-#include "printf_helpers.h"
+# include "libft.h"
+# include "printf_conv.h"
+# include "printf_helpers.h"
 
+# define CONV_LST "sSpdDioOuUxXcC%"
 /*
 ** printf is a variadic function (look it up on google)
 */
-#include <stdarg.h>
+# include <stdarg.h>
 
-int		ft_printf(const char *format, ...);
-int		ft_dprintf(int fd, const char *format, ...);
-int		ft_vprintf(const char *format, va_list ap);
-int		ft_vdprintf(int fd, const char *format, va_list ap);
+int				ft_printf(const char *format, ...);
+int				ft_dprintf(int fd, const char *format, ...);
+int				ft_vprintf(const char *format, va_list ap);
+int				ft_vdprintf(int fd, const char *format, va_list ap);
+
+typedef struct	s_parg
+{
+	int			width;
+	int			prec;
+	char		sign;
+	int			flen;
+}				t_parg;
 
 #endif

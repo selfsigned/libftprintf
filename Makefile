@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/01/29 15:22:53 by xperrin          ###   ########.fr        #
+#    Updated: 2018/01/29 23:29:36 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 SONAME = $(NAME:.a=.so)
 DNAME = $(NAME)
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 INCDIR = includes
 PRINTFINC = printf.h printf_helpers.h printf_conv.h
 INCFILES = libft.h get_next_line.h $(PRINTFINC)
@@ -57,7 +57,8 @@ GNL = get_next_line.c
 PRINTFP = $(SRCDIR)/printf
 PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse
 PRINTF_FUN = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
-PRINTF = $(PRINTF_FUN)
+PRINTF_PARSE = readarg.c
+PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE)
 
 OBJDIR = obj
 VPATH = $(MEMDIR):$(STRDIR):$(DISPDIR):$(LSTDIR):$(MATHDIR):\
@@ -93,7 +94,7 @@ $(OBJDIR):
 
 $(OBJDIR)/%.o: %.c $(INCFULL) | $(OBJDIR)
 	@printf "$(GOOD)[$(DNAME)]$(AIGHT)[$(dir $<)]$(NOCOLOR)$(notdir $(@:.o=))\n"
-	$(CC) $(CFLAGS) -c -o $@ $< $(INC)
+	@$(CC) $(CFLAGS) -c -o $@ $< $(INC)
 
 # Cleanup
 clean:

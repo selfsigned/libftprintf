@@ -6,25 +6,46 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:41:49 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/29 09:23:48 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/01/29 23:31:54 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include "unistd.h"
+#include <unistd.h>
+#include <stdlib.h>
 
-int		ft_vdprintf(int fd, const char *format, va_list ap)
+/*
+** len[0] = len to next conv
+** len[1] = total printf len
+*/
+
+static int		_freeret(int *tofree)
 {
-	size_t		lentoconv;
+	free(tofree);
+	return (-1);
+}
 
-	(void)ap;
+int				ft_vdprintf(int fd, const char *format, va_list ap)
+{
+	int		*len;
+	int		res;
+
+	len = ft_memalloc(sizeof(int) * 2);
 	while (*format)
 	{
-		if (*format == '%')
-			format++;
-		lentoconv = ft_strrlen(format, '%');
-		write(fd, format, lentoconv);
-		format += lentoconv;
+		if (*format++ == '%')
+		{
+			len = printf_readarg(fd, len, format, ap);
+			if (len[1] == -1)
+				return (_freeret(len));
+			format = format + len[0];
+		}
+		len[0] = ft_strrlen(format, '%');
+		len[1] += len[0];
+		write(fd, format, len[0]);
+		format += len[0];
 	}
-	return (lentoconv);
+	res = len[1];
+	free(len);
+	return (res);
 }

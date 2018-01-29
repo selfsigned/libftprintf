@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   readarg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/26 17:53:44 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/29 15:58:19 by xperrin          ###   ########.fr       */
+/*   Created: 2018/01/29 16:15:33 by xperrin           #+#    #+#             */
+/*   Updated: 2018/01/29 23:30:47 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int		ft_printf(const char *format, ...)
+static	int *_leniter(int *len)
 {
-	int		res;
-	va_list	ap;
+	len[0] += 1;
+	len[1] += 1;
+	return (len);
+}
 
-	va_start(ap, format);
-	res = ft_vdprintf(0, format, ap);
-	va_end(ap);
-	return (res);
+int		*printf_readarg(int fd, int *len, const char *fmt, va_list ap)
+{
+	if (*fmt == '%')
+	{
+		ft_putchar_fd('%', fd);
+		len = _leniter(len);
+	}
+	(void)fmt;
+	(void)ap;
+	return (len);
 }
