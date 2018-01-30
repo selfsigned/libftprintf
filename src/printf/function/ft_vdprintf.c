@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:41:49 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/29 23:31:54 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:13:41 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ int				ft_vdprintf(int fd, const char *format, va_list ap)
 	len = ft_memalloc(sizeof(int) * 2);
 	while (*format)
 	{
-		if (*format++ == '%')
+		len[0] = 0;
+		if (*format == '%')
 		{
-			len = printf_readarg(fd, len, format, ap);
+			len = printf_readarg(fd, len, format++, ap);
 			if (len[1] == -1)
 				return (_freeret(len));
 			format = format + len[0];
 		}
 		len[0] = ft_strrlen(format, '%');
-		len[1] += len[0];
 		write(fd, format, len[0]);
 		format += len[0];
 	}
