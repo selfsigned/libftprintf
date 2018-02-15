@@ -1,7 +1,12 @@
+#include "libft.h"
 #include <stdio.h>
 
-int	main (int argc, char **argv) {
-	if (argc != 3)
+int		main(int ac, char **av)
+{
+	int		res;
+
+	if (ac != 3)
 		return (1);
-	printf(argv[1], argv[2]);
+	res = ft_printf(av[1], av[2]);
+	printf("\nft_printf output: %d", res);
 }

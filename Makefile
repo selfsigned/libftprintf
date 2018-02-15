@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/01/29 23:29:36 by xperrin          ###   ########.fr        #
+#    Updated: 2018/02/16 00:02:41 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ GNL = get_next_line.c
 
 PRINTFP = $(SRCDIR)/printf
 PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse
-PRINTF_FUN = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
+PRINTF_FUN = ft_sprintf.c ft_printf.c ft_dprintf.c ft_vsprintf.c ft_vprintf.c ft_vdprintf.c
 PRINTF_PARSE = readarg.c
 PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE)
 

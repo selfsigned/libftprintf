@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 17:57:28 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/29 16:28:00 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/15 23:55:29 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 ** printf is a variadic function (look it up on google)
 */
 # include <stdarg.h>
-
+char			*ft_sprintf(const char *format, ...);
 int				ft_printf(const char *format, ...);
 int				ft_dprintf(int fd, const char *format, ...);
+char			*ft_vsprintf(const char *format, va_list ap);
 int				ft_vprintf(const char *format, va_list ap);
 int				ft_vdprintf(int fd, const char *format, va_list ap);
 
