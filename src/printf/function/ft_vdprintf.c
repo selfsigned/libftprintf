@@ -6,20 +6,46 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:41:49 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/16 00:20:27 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/01/30 17:13:41 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include <unistd.h>
+#include <stdlib.h>
+
+/*
+** len[0] = len to next conv
+** len[1] = total printf len
+*/
+
+static int		_freeret(int *tofree)
+{
+	free(tofree);
+	return (-1);
+}
 
 int				ft_vdprintf(int fd, const char *format, va_list ap)
 {
-	char	*res;
-	size_t	reslen;
+	int		*len;
+	int		res;
 
-	res = ft_vsprintf(format, ap);
-	reslen = ft_strlen(res);
-	write(fd, res, reslen);
-	return (reslen);
+	len = ft_memalloc(sizeof(int) * 2);
+	while (*format)
+	{
+		len[0] = 0;
+		if (*format == '%')
+		{
+			len = printf_readarg(fd, len, format++, ap);
+			if (len[1] == -1)
+				return (_freeret(len));
+			format = format + len[0];
+		}
+		len[0] = ft_strrlen(format, '%');
+		write(fd, format, len[0]);
+		format += len[0];
+	}
+	res = len[1];
+	free(len);
+	return (res);
 }
