@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 20:10:52 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/16 01:04:00 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/01/29 09:21:01 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 /*
 ** My functions
 */
-char				*ft_strjoinfree(char *s1, char const *s2);
 int					ft_islower(int chr);
 int					ft_isupper(int chr);
 int					ft_cntword(char const *s, char c);
