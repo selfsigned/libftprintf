@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vdprintf.c                                      :+:      :+:    :+:   */
+/*   printf_structs.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/26 18:41:49 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/16 02:32:24 by xperrin          ###   ########.fr       */
+/*   Created: 2018/02/16 01:56:57 by xperrin           #+#    #+#             */
+/*   Updated: 2018/02/16 02:28:51 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <unistd.h>
+#ifndef PRINTF_STRUCTS_H
+# define PRINTF_STRUCTS_H
 
-int				ft_vdprintf(int fd, const char *format, va_list ap)
+/*
+** Printf argument structure for parsing
+*/
+typedef struct	s_parg
 {
-	size_t	i;
-	int		res;
-	t_parg	parg;
+	int			width;
+	int			prec;
+	char		sign;
+}				t_parg;
 
-	res = 0;
-	i = 0;
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			i++;
-			parg = printf_readarg(i, format, ap);
-		}
-		else
-		{
-			write(fd, format + i, 1);
-			i++;
-			res += 1;
-		}
-	}
-	return (res);
-}
+#endif
