@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vdprintf.c                                      :+:      :+:    :+:   */
+/*   ft_strjoinfree.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/26 18:41:49 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/16 00:31:40 by xperrin          ###   ########.fr       */
+/*   Created: 2018/02/16 01:00:09 by xperrin           #+#    #+#             */
+/*   Updated: 2018/02/16 01:03:19 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <unistd.h>
+#include "libft.h"
+#include <stdlib.h>
 
-int				ft_vdprintf(int fd, const char *format, va_list ap)
+char	*ft_strjoinfree(char *s1, char const *s2)
 {
 	char	*res;
-	size_t	reslen;
 
-	res = ft_vsprintf(format, ap);
-	reslen = ft_strlen(res);
-	if (reslen)
-		write(fd, res, reslen);
-	return (reslen);
+	res = ft_strjoin(s1, s2);
+	free(s1);
+	return(res);
 }
