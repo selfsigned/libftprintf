@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:02:58 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/16 01:52:44 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/17 19:32:57 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "printf.h"
 #include <stdarg.h>
 
-t_parg		printf_readarg(size_t i, const char *fmt, va_list ap);
+t_parg		printf_readarg(size_t i, const char *fmt);
 
 #endif

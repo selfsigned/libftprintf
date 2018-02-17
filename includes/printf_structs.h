@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 01:56:57 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/16 18:09:30 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/17 21:21:39 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,9 @@
 
 # include "printf.h"
 
-/*
-** Printf argument structure for parsing
-**
-** ft_printf string format:
-** %[flags][width][.precision][length]type
-*/
-enum			e_flags
-{
-	sharp,
-	zero,
-	minus,
-	plus,
-	space
-};
-
 typedef	enum	e_length
 {
+	Null,
 	hh,
 	h,
 	l,
@@ -39,6 +25,14 @@ typedef	enum	e_length
 	j,
 	z
 }				t_length;
+
+/*
+** Printf argument structure for parsing
+**
+** ft_printf string format:
+** %[flags][width][.precision][length]type
+**
+*/
 
 typedef struct	s_parg
 {

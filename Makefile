@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/02/16 02:00:13 by xperrin          ###   ########.fr        #
+#    Updated: 2018/02/17 21:23:41 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = libftprintf.a
 SONAME = $(NAME:.a=.so)
 DNAME = $(NAME)
 CC = clang
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 INCDIR = includes
-PRINTFINC = printf.h printf_structs.h printf_helpers.h printf_conv.h
-INCFILES = libft.h get_next_line.h $(PRINTFINC)
+#PRINTFINC = printf.h printf_structs.h printf_helpers.h printf_conv.h
+INCFILES = libft.h get_next_line.h #$(PRINTFINC)
 INCFULL = $(addprefix $(INCDIR)/, $(INCFILES))
 INC = $(addprefix -I, $(INCDIR))
 SRCDIR = src

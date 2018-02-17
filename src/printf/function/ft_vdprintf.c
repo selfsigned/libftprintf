@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:41:49 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/16 18:06:06 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/17 19:34:37 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int				ft_vdprintf(int fd, const char *format, va_list ap)
 	int		res;
 	t_parg	parg;
 
+	(void)ap;
 	res = 0;
 	i = 0;
 	while (format[i])
@@ -26,10 +27,10 @@ int				ft_vdprintf(int fd, const char *format, va_list ap)
 		if (format[i] == '%')
 		{
 			i++;
-			parg = printf_readarg(i, format, ap);
+			parg = printf_readarg(i, format);
 			/* ft_putstr(parg.flags); */
 			/* ft_putnbr(parg.width); */
-			/* ft_putchar(parg.type); */
+			/* ft_putnbr(parg.length); */
 			i = parg.convlen;
 		}
 		else
