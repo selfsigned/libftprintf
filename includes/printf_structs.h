@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 01:56:57 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/17 21:21:39 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/18 16:50:30 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PRINTF_STRUCTS_H
 
 # include "printf.h"
+
+# define WIDTH_CHARS "#0-+ "
 
 typedef	enum	e_length
 {

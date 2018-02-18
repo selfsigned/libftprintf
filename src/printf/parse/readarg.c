@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:15:33 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/17 19:33:13 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/18 17:02:48 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,22 @@ static	t_parg	init_parg(void)
 	return (parg);
 }
 
+static	size_t		p_flags(const char *fmt, t_parg *parg)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < 5 && fmt[i] && ft_strchr(WIDTH_CHARS, fmt[i]))
+	{
+		parg->flags[i] = fmt[i];
+		i++;
+	}
+	parg->flags[i] = '\0';
+	return (i);
+}
+
 /*
-** parsing the length
+** Parsers
 */
 
 static	size_t		p_length(const char *fmt, t_parg *parg)
@@ -52,7 +66,7 @@ static	size_t		p_length(const char *fmt, t_parg *parg)
 ** Printf string syntax:
 **  %[flags][width][.precision][length]type
 **
-**  TBD: flags
+**  TBD: - error handling in precision
 */
 
 t_parg			printf_readarg(size_t i, const char *fmt)
@@ -60,6 +74,7 @@ t_parg			printf_readarg(size_t i, const char *fmt)
 	t_parg	parg;
 
 	parg = init_parg();
+	i += p_flags(fmt + i, &parg);
 	if (ft_isdigit(fmt[i]))
 	{
 		parg.width = ft_atoi(fmt + i);
