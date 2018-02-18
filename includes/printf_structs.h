@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 01:56:57 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/18 16:50:30 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/18 22:08:49 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ typedef	enum	e_length
 
 /*
 ** Printf argument structure for parsing
-**
 ** ft_printf string format:
 ** %[flags][width][.precision][length]type
-**
 */
 
 typedef struct	s_parg

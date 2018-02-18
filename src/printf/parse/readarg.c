@@ -6,21 +6,11 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:15:33 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/18 17:02:48 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/18 21:35:41 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-
-static	t_parg	init_parg(void)
-{
-	t_parg	parg;
-
-	parg.width = 0;
-	parg.prec = 0;
-	parg.type = '\0';
-	return (parg);
-}
 
 static	size_t		p_flags(const char *fmt, t_parg *parg)
 {
@@ -69,17 +59,18 @@ static	size_t		p_length(const char *fmt, t_parg *parg)
 **  TBD: - error handling in precision
 */
 
-t_parg			printf_readarg(size_t i, const char *fmt)
+t_parg				printf_readarg(size_t i, const char *fmt)
 {
 	t_parg	parg;
 
-	parg = init_parg();
 	i += p_flags(fmt + i, &parg);
+	parg.width = 0;
 	if (ft_isdigit(fmt[i]))
 	{
 		parg.width = ft_atoi(fmt + i);
 		i += ft_cntdigit(parg.width);
 	}
+	parg.prec = -1;
 	if (fmt[i] == '.')
 	{
 		parg.prec = ft_atoi(fmt + 1 + i++);

@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/02/17 21:23:41 by xperrin          ###   ########.fr        #
+#    Updated: 2018/02/18 21:57:15 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,10 +55,11 @@ GNLDIR = $(SRCDIR)/gnl
 GNL = get_next_line.c
 
 PRINTFP = $(SRCDIR)/printf
-PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse
+PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse $(PRINTFP)/conv
 PRINTF_FUN = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
-PRINTF_PARSE = readarg.c
-PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE)
+PRINTF_PARSE = readarg.c printarg.c
+PRINTF_CONV = conv_string.c
+PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE) $(PRINTF_CONV)
 
 OBJDIR = obj
 VPATH = $(MEMDIR):$(STRDIR):$(DISPDIR):$(LSTDIR):$(MATHDIR):\

@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:41:49 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/18 17:22:15 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/18 22:09:28 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,8 @@ int				ft_vdprintf(int fd, const char *format, va_list ap)
 		{
 			i++;
 			parg = printf_readarg(i, format);
-			/* ft_putstr(parg.flags); */
-			/* ft_putnbr(parg.width); */
-			/* ft_putnbr(parg.prec); */
-			/* ft_putnbr(parg.length); */
-			/* ft_putchar(parg.type); */
 			i = parg.convlen;
-			/* res = printf_printf(fd, parg, ap); */
+			res += printf_printarg(fd, parg, ap);
 		}
 		else
 		{

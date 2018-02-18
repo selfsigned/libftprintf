@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_helpers.h                                   :+:      :+:    :+:   */
+/*   printarg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 15:02:58 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/17 19:32:57 by xperrin          ###   ########.fr       */
+/*   Created: 2018/02/18 17:23:40 by xperrin           #+#    #+#             */
+/*   Updated: 2018/02/18 22:10:28 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_HELPERS_H
-# define PRINTF_HELPERS_H
+#include "printf.h"
 
-# include "printf.h"
-#include <stdarg.h>
+size_t	printf_printarg(int fd, t_parg parg, va_list ap)
+{
+	size_t	i;
 
-t_parg		printf_readarg(size_t i, const char *fmt);
-
-#endif
+	i = 0;
+	if (parg.type == '%')
+	{
+		ft_putchar('%');
+		return (1);
+	}
+	if (ft_strchr("cC", parg.type))
+		return (0);
+	if (ft_strchr("sS", parg.type))
+		return (conv_string(fd, parg, ap));
+	if (ft_strchr("dDiuU", parg.type))
+		return (0);
+	return (i);
+}
