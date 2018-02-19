@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 19:54:58 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/19 14:52:51 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/19 17:02:22 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static	size_t	display_string(int fd, t_parg parg, va_list ap)
 
 	i = 0;
 	s = va_arg(ap, char*);
-	parg.prec = (parg.prec < 0 || ft_strlen(s) < (size_t)parg.prec) ?
-		(int)ft_strlen(s) : parg.prec;
+	s = (!s) ? "(null)" : s;
+	parg.prec = (parg.prec < 0 || ft_strlen(s) < (size_t)parg.prec)
+		? (int)ft_strlen(s) : parg.prec;
 	if (ft_strchr(parg.flags, '-'))
 		write(fd, s, parg.prec);
 	while (parg.width - parg.prec > 0)
