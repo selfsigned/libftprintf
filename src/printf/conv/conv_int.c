@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printarg.c                                         :+:      :+:    :+:   */
+/*   conv_int.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/18 17:23:40 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/20 23:52:35 by xperrin          ###   ########.fr       */
+/*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
+/*   Updated: 2018/02/20 23:53:44 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include <printf.h>
 
-size_t	printf_printarg(int fd, t_parg parg, va_list ap)
+size_t	conv_int(int fd, t_parg parg, va_list ap)
 {
-	if (ft_strchr("c%", parg.type))
-		return (conv_char(fd, parg, ap));
-	else if (parg.type == 's')
-		return (conv_string(fd, parg, ap));
-	else if (ft_strchr("dDi", parg.type))
-		return (conv_int(fd, parg, ap));
-	return (0);
+	int		n;
+	size_t	i;
+
+	n = va_arg(ap, int);
+	ft_putnbr_fd(n, fd);
+	return (ft_cntdigit(n));
 }

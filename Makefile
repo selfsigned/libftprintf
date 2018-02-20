@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/02/19 13:56:37 by xperrin          ###   ########.fr        #
+#    Updated: 2018/02/20 23:43:26 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 SONAME = $(NAME:.a=.so)
 DNAME = $(NAME)
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra #-Werror
 INCDIR = includes
 #PRINTFINC = printf.h printf_structs.h printf_helpers.h printf_conv.h
 INCFILES = libft.h get_next_line.h #$(PRINTFINC)
@@ -58,7 +58,7 @@ PRINTFP = $(SRCDIR)/printf
 PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse $(PRINTFP)/conv
 PRINTF_FUN = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
 PRINTF_PARSE = readarg.c printarg.c
-PRINTF_CONV = conv_char.c conv_string.c
+PRINTF_CONV = conv_char.c conv_string.c conv_int.c
 PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE) $(PRINTF_CONV)
 
 OBJDIR = obj

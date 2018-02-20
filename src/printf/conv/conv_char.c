@@ -6,14 +6,14 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 13:42:25 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/19 17:12:55 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/20 23:34:31 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include <unistd.h>
 
-static	size_t	display_char(int fd, t_parg parg, va_list ap)
+size_t	conv_char(int fd, t_parg parg, va_list ap)
 {
 	char	c;
 	size_t	i;
@@ -32,11 +32,4 @@ static	size_t	display_char(int fd, t_parg parg, va_list ap)
 	if (!ft_strchr(parg.flags, '-'))
 		ft_putchar_fd(c, fd);
 	return ((c) ? i : i - 1);
-}
-
-size_t	conv_char(int fd, t_parg parg, va_list ap)
-{
-	if ((parg.type == 'c' || parg.type == '%') && !ft_strchr(parg.flags, 'l'))
-		return (display_char(fd, parg, ap));
-	return (0);
 }

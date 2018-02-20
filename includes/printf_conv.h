@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:07:29 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/18 20:06:00 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/20 23:37:52 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 size_t	conv_char(int fd, t_parg parg, va_list ap);
 size_t	conv_string(int fd, t_parg parg, va_list ap);
-size_t	conv_decimal(int fd, t_parg parg, va_list ap);
+size_t	conv_int(int fd, t_parg parg, va_list ap);
 size_t	conv_hexa(int fd, t_parg parg, va_list ap);
 
 #endif
