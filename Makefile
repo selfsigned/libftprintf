@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/02/21 01:22:25 by xperrin          ###   ########.fr        #
+#    Updated: 2018/02/23 23:46:18 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 SONAME = $(NAME:.a=.so)
 DNAME = $(NAME)
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Wpedantic -g
 INCDIR = includes
 #PRINTFINC = printf.h printf_structs.h printf_helpers.h printf_conv.h
 INCFILES = libft.h get_next_line.h #$(PRINTFINC)
@@ -37,7 +37,7 @@ FT_STR = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 	ft_strnew.c ft_strdel.c ft_strclr.c \
 	ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c \
 	ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c \
-	ft_strtrim.c ft_strsplit.c ft_itoa.c \
+	ft_strtrim.c ft_strsplit.c ft_itoa.c ft_itoa_base.c \
 	ft_cntword.c ft_strrlen.c ft_strndup.c ft_strdeltab.c
 
 DISPDIR = $(SRCDIR)/display
@@ -73,7 +73,7 @@ AIGHT=\033[1;33m
 WARN=\033[1;31m
 NOCOLOR=\033[0m
 
-.PHONY: all so clean fclean re
+.PHONY: all so clean fclean re test moulitest
 
 all: $(NAME)
 
@@ -96,6 +96,26 @@ $(OBJDIR):
 $(OBJDIR)/%.o: %.c $(INCFULL) | $(OBJDIR)
 	@printf "$(GOOD)[$(DNAME)]$(AIGHT)[$(dir $<)]$(NOCOLOR)$(notdir $(@:.o=))\n"
 	@$(CC) $(CFLAGS) -c -o $@ $< $(INC)
+
+# Tests
+MOULITEST_REPO = https://github.com/yyang42/moulitest
+MOULITEST_TRACE = moulitrace.txt
+
+test: moulitest_libft
+
+moulitest_libft: $(NAME)
+	if [ ! -d moulitest ]; then \
+		git clone $(MOULITEST_REPO); fi
+	echo 'LIBFT_PATH = $$PWD/../..' > moulitest/config.ini
+	mv $(NAME) libft.a
+	$(MAKE) --no-print-directory -C moulitest/ libft_bonus > $(MOULITEST_TRACE)
+	@printf "$(GOOD)[MOULITEST]$(NOCOLOR)Tests finished, see $(MOULITEST_TRACE)\n"
+	@if grep -qE "ABRT|SEGV|BUS\!|TIME|FAIL" $(MOULITEST_TRACE) ; then \
+		printf "$(GOOD)[MOULITEST]$(WARN)Some tests failed$(NOCOLOR)\n"; \
+		exit 1; \
+	else \
+		printf "$(GOOD)[MOULITEST]$(NOCOLOR)All tests passed\n"; \
+	fi
 
 # Cleanup
 clean:

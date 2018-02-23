@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 19:54:28 by xperrin           #+#    #+#             */
-/*   Updated: 2017/11/24 17:15:00 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/23 22:50:12 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putnbr_fd(int n, int fd)
 	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
-		if (n == MINIMUM_INT)
+		if (n == INT_MIN)
 		{
 			ft_putchar_fd('2', fd);
 			n = -147483648;

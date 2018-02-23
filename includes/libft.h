@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 20:10:52 by xperrin           #+#    #+#             */
-/*   Updated: 2018/01/29 09:21:01 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/23 23:02:23 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <limits.h>
 
 # include "get_next_line.h"
 # include "printf.h"
 
-# define MAXIMUM_INT 2147483647
-# define MINIMUM_INT -2147483648
 # define MINIMUM_INT_STR "-2147483648"
 
 /*
@@ -106,6 +105,7 @@ char				*ft_strndup(char const *s, size_t n);
 char				*ft_strupcase(char *s);
 char				*ft_strlowcase(char *s);
 int					ft_cntdigit(int n);
+char				*ft_itoa_base(long long int n, char *base);
 int					ft_pow(int x, int y);
 int					ft_sqrt(int x);
 void				ft_strdeltab(char **tab, size_t tab_len);
