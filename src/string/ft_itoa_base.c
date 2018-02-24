@@ -6,13 +6,13 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 22:17:39 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/23 23:54:53 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/24 01:35:11 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		ft_cntdigt_b(long long int n, size_t radix)
+static	int		ft_cntdigt_b(intmax_t n, size_t radix)
 {
 	size_t	r;
 
@@ -25,7 +25,7 @@ static	int		ft_cntdigt_b(long long int n, size_t radix)
 	return (r);
 }
 
-char			*ft_itoa_base(long long int n, char *base)
+char			*ft_itoa_base(intmax_t n, char *base)
 {
 	char			*str;
 	size_t			radix;
