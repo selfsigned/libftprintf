@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 22:17:39 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/24 01:35:11 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/25 01:31:27 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char			*ft_itoa_base(intmax_t n, char *base)
 	int				isneg;
 
 	isneg = (n < 0) ? 1 : 0;
+	if (n == LONG_MIN)
+		return (ft_strdup("-9223372036854775808"));
 	if (isneg)
 		n = -n;
 	radix = ft_strlen(base);
