@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/25 02:26:37 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/26 01:39:24 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,28 @@ static	intmax_t	intconv(va_list ap, t_length len)
 	return (r);
 }
 
+/*
+** d = argument ; f = flag ; w = width ; p = precision
+**
+** Three cases:
+**
+** Precision only:
+** p > w and p > d, basically just zeroes
+** (might be the same than left aligned)
+**
+** Left aligned: (default)
+** ' ' | 'prepend' | '0' | itoa(d)
+**
+** Right aligned:
+** 'prepend' | '0': p - d | itoa(d) | ' ': w - p (-prepend?)
+*/
+
 size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 {
 	char		*str;
 	size_t		w;
 	size_t		i;
+	int			size;
 
 	if (ft_strchr("idD", parg.type))
 		str = ft_itoa_base(n, "0123456789");
@@ -51,15 +68,37 @@ size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 		str = ft_itoa_base(n, "0123456789abcdef");
 	w = ft_strlen(str);
 	i = w;
+	size = (parg.prec > (int)w) ? parg.prec : (int)w;
+	size = (prepend) ? size + 1 : size;
 	if (parg.prec >= parg.width && parg.prec > (int)w)
 	{
 		ft_putchar_fd(prepend, fd);
-		--i;
+		i = (!(i - 1)) ? i : i - 1;
 		while (i++ && parg.prec-- > (int)w)
 			ft_putchar_fd('0', fd);
+		ft_putstr_fd(str, fd);
 	}
-	ft_putchar_fd(prepend, fd);
-	ft_putstr_fd(str, fd);
+	else if (!ft_strchr(parg.flags, '-'))
+	{
+		while (parg.width-- - size > 0)
+		{
+			ft_putchar_fd(' ', fd);
+			i++;
+		}
+		ft_putchar_fd(prepend, fd);
+		size = (prepend) ? size - 1 : size;
+		while (size-- - w > 0)
+		{
+			ft_putchar_fd('0', fd);
+			i++;
+		}
+		ft_putstr_fd(str, fd);
+	}
+	else
+	{
+		ft_putchar_fd(prepend, fd);
+		ft_putstr_fd(str, fd);
+	}
 	free(str);
 	return (i);
 }
@@ -78,6 +117,11 @@ size_t				conv_nbr(int fd, t_parg parg, va_list ap)
 	{
 		n = -n;
 		prepend = '-';
+	}
+	if (ft_strchr(parg.flags, '0'))
+	{
+		parg.prec = (prepend) ? parg.width - 1 : parg.width;
+		parg.width = 0;
 	}
 	w = bloat_print(fd, n, prepend, parg);
 	return ((prepend) ? w + 1 : w);
