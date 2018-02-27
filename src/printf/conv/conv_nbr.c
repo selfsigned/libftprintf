@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/27 01:37:10 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/27 17:48:39 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 	size = (prepend) ? size + 1 : size;
 	if (parg.prec >= parg.width && parg.prec > (int)w)
 	{
-		ft_putchar_fd(prepend, fd);
+		(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
 		i = (!(i - 1)) ? i : i - 1;
 		while (i++ && parg.prec-- > (int)w)
 			ft_putchar_fd('0', fd);
@@ -86,7 +86,7 @@ size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 			ft_putchar_fd(' ', fd);
 			i++;
 		}
-		ft_putchar_fd(prepend, fd);
+		(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
 		size = (prepend) ? size - 1 : size;
 		while (size-- - w > 0)
 		{
@@ -97,7 +97,7 @@ size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 	}
 	else
 	{
-		ft_putchar_fd(prepend, fd);
+		(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
 		tmp = size;
 		while (size-- - w > 0)
 		{
