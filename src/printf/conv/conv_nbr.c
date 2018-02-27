@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/26 01:39:24 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/27 01:37:10 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 	size_t		w;
 	size_t		i;
 	int			size;
+	int			tmp;
 
 	if (ft_strchr("idD", parg.type))
 		str = ft_itoa_base(n, "0123456789");
@@ -97,7 +98,18 @@ size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 	else
 	{
 		ft_putchar_fd(prepend, fd);
+		tmp = size;
+		while (size-- - w > 0)
+		{
+			ft_putchar_fd('0', fd);
+			i++;
+		}
 		ft_putstr_fd(str, fd);
+		while (parg.width-- - tmp > 0)
+		{
+			ft_putchar_fd(' ', fd);
+			i++;
+		}
 	}
 	free(str);
 	return (i);
