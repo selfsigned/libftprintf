@@ -1,12 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   readarg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:15:33 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/18 21:35:41 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/28 17:26:32 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +71,9 @@ t_parg				printf_readarg(size_t i, const char *fmt)
 	parg.prec = -1;
 	if (fmt[i] == '.')
 	{
-		parg.prec = ft_atoi(fmt + 1 + i++);
-		i += ft_cntdigit(parg.prec);
+		parg.prec = ft_atoi(fmt + i++ + 1);
+		while (ft_isdigit(fmt[i]))
+			i++;
 	}
 	i += p_length(fmt + i, &parg);
 	parg.type = fmt[i++];

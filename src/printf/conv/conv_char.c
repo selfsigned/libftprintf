@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 13:42:25 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/20 23:34:31 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/28 18:19:32 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ size_t	conv_char(int fd, t_parg parg, va_list ap)
 	}
 	if (!ft_strchr(parg.flags, '-'))
 		ft_putchar_fd(c, fd);
-	return ((c) ? i : i - 1);
+	return (i);
 }

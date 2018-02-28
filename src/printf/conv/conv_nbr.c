@@ -6,31 +6,33 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/27 17:48:39 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/28 18:35:21 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <printf.h>
 #include <stdlib.h>
 
-static	intmax_t	intconv(va_list ap, t_length len)
+static	intmax_t	intconv(va_list ap, t_parg parg)
 {
 	intmax_t r;
 
 	r = va_arg(ap, intmax_t);
-	if (len == hh)
-		r = (char)r;
-	else if (len == h)
-		r = (short)r;
-	else if (len == l)
+	if (parg.type == 'D')
 		r = (long int)r;
-	else if (len == ll)
+	else if (parg.length == hh)
+		r = (char)r;
+	else if (parg.length == h)
+		r = (short int)r;
+	else if (parg.length == l)
+		r = (long int)r;
+	else if (parg.length == ll)
 		r = (long long)r;
-	else if (len == z)
+	else if (parg.length == z)
 		r = (size_t)r;
-	else if (len == j)
+	else if (parg.length == j)
 		r = (intmax_t)r;
-	else if (len == j)
+	else if (parg.length == j)
 		r = (intmax_t)r;
 	else
 		r = (int)r;
@@ -124,7 +126,7 @@ size_t				conv_nbr(int fd, t_parg parg, va_list ap)
 	prepend = '\0';
 	prepend = ft_strchr(parg.flags, ' ') ? ' ' : prepend;
 	prepend = ft_strchr(parg.flags, '+') ? '+' : prepend;
-	n = intconv(ap, parg.length);
+	n = intconv(ap, parg);
 	if (n < 0)
 	{
 		n = -n;
