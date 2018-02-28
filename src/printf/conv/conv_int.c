@@ -1,44 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_nbr.c                                         :+:      :+:    :+:   */
+/*   conv_int.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/28 18:35:21 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/02/28 18:57:26 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <printf.h>
 #include <stdlib.h>
-
-static	intmax_t	intconv(va_list ap, t_parg parg)
-{
-	intmax_t r;
-
-	r = va_arg(ap, intmax_t);
-	if (parg.type == 'D')
-		r = (long int)r;
-	else if (parg.length == hh)
-		r = (char)r;
-	else if (parg.length == h)
-		r = (short int)r;
-	else if (parg.length == l)
-		r = (long int)r;
-	else if (parg.length == ll)
-		r = (long long)r;
-	else if (parg.length == z)
-		r = (size_t)r;
-	else if (parg.length == j)
-		r = (intmax_t)r;
-	else if (parg.length == j)
-		r = (intmax_t)r;
-	else
-		r = (int)r;
-	return (r);
-}
-
 /*
 ** d = argument ; f = flag ; w = width ; p = precision
 **
@@ -52,10 +25,10 @@ static	intmax_t	intconv(va_list ap, t_parg parg)
 ** ' ' | 'prepend' | '0' | itoa(d)
 **
 ** Right aligned:
-** 'prepend' | '0': p - d | itoa(d) | ' ': w - p (-prepend?)
+** 'prepend' | '0' | itoa(d) | ' ': w - p (-prepend?)
 */
 
-size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
+static size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 {
 	char		*str;
 	size_t		w;
@@ -117,7 +90,7 @@ size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 	return (i);
 }
 
-size_t				conv_nbr(int fd, t_parg parg, va_list ap)
+size_t						conv_int(int fd, t_parg parg, va_list ap)
 {
 	intmax_t	n;
 	char		prepend;
@@ -126,7 +99,7 @@ size_t				conv_nbr(int fd, t_parg parg, va_list ap)
 	prepend = '\0';
 	prepend = ft_strchr(parg.flags, ' ') ? ' ' : prepend;
 	prepend = ft_strchr(parg.flags, '+') ? '+' : prepend;
-	n = intconv(ap, parg);
+	n = conv_t_int(ap, parg);
 	if (n < 0)
 	{
 		n = -n;
