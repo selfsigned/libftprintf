@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/28 18:57:26 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/02 22:36:10 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 	int			tmp;
 
 	if (ft_strchr("idD", parg.type))
-		str = ft_itoa_base(n, "0123456789");
+		str = ft_utoa_base(n, "0123456789");
 	else if (parg.type == 'X')
 		str = ft_itoa_base(n, "0123456789ABCDEF");
 	else
