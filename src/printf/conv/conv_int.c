@@ -6,12 +6,13 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/02 22:36:10 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/03 23:22:42 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <printf.h>
+#include "printf.h"
 #include <stdlib.h>
+
 /*
 ** d = argument ; f = flag ; w = width ; p = precision
 **
@@ -28,20 +29,63 @@
 ** 'prepend' | '0' | itoa(d) | ' ': w - p (-prepend?)
 */
 
-static size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
+static	size_t		l_print(int fd,  char prepend, char *str, t_parg parg, int w)
+{
+	int		size;
+	size_t	i;
+
+	i = w;
+	size = (parg.prec > (int)w) ? parg.prec : (int)w;
+	size = (prepend) ? size + 1 : size;
+	while (parg.width-- - size > 0)
+	{
+		ft_putchar_fd(' ', fd);
+		i++;
+	}
+	(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
+	size = (prepend) ? size - 1 : size;
+	while (size-- - w > 0)
+	{
+		ft_putchar_fd('0', fd);
+		i++;
+	}
+	ft_putstr_fd(str, fd);
+	return (i);
+}
+
+static	size_t		r_print(int fd, char prepend, char *str, t_parg parg, int w)
+{
+	int		size;
+	size_t	i;
+	int		tmp;
+
+	i = w;
+	size = (parg.prec > (int)w) ? parg.prec : (int)w;
+	size = (prepend) ? size + 1 : size;
+	(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
+	tmp = size;
+	while (size-- - w > 0)
+	{
+		ft_putchar_fd('0', fd);
+		i++;
+	}
+	ft_putstr_fd(str, fd);
+	while (parg.width-- - tmp > 0)
+	{
+		ft_putchar_fd(' ', fd);
+		i++;
+	}
+	return(i);
+}
+
+static size_t		bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 {
 	char		*str;
 	size_t		w;
 	size_t		i;
 	int			size;
-	int			tmp;
 
-	if (ft_strchr("idD", parg.type))
-		str = ft_utoa_base(n, "0123456789");
-	else if (parg.type == 'X')
-		str = ft_itoa_base(n, "0123456789ABCDEF");
-	else
-		str = ft_itoa_base(n, "0123456789abcdef");
+	str = ft_itoa_base(n, "0123456789");
 	w = ft_strlen(str);
 	i = w;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
@@ -55,42 +99,14 @@ static size_t				bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 		ft_putstr_fd(str, fd);
 	}
 	else if (!ft_strchr(parg.flags, '-'))
-	{
-		while (parg.width-- - size > 0)
-		{
-			ft_putchar_fd(' ', fd);
-			i++;
-		}
-		(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
-		size = (prepend) ? size - 1 : size;
-		while (size-- - w > 0)
-		{
-			ft_putchar_fd('0', fd);
-			i++;
-		}
-		ft_putstr_fd(str, fd);
-	}
+		i = l_print(fd, prepend, str, parg, w);
 	else
-	{
-		(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
-		tmp = size;
-		while (size-- - w > 0)
-		{
-			ft_putchar_fd('0', fd);
-			i++;
-		}
-		ft_putstr_fd(str, fd);
-		while (parg.width-- - tmp > 0)
-		{
-			ft_putchar_fd(' ', fd);
-			i++;
-		}
-	}
+		i = r_print(fd, prepend, str, parg, w);
 	free(str);
 	return (i);
 }
 
-size_t						conv_int(int fd, t_parg parg, va_list ap)
+size_t				conv_int(int fd, t_parg parg, va_list ap)
 {
 	intmax_t	n;
 	char		prepend;
