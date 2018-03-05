@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/05 12:43:08 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/05 22:17:52 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@
 ** 'prepend' | '0' | itoa(d) | ' ': w - p (-prepend?)
 */
 
-static	size_t		l_print(int fd,  char prepend, char *str, t_parg parg, int w)
+static	size_t		l_print(int fd, char prepend, char *str, t_parg parg)
 {
 	int		size;
 	size_t	i;
+	size_t	w;
 
+	w = ft_strlen(str);
 	i = w;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
 	size = (prepend) ? size + 1 : size;
@@ -53,12 +55,14 @@ static	size_t		l_print(int fd,  char prepend, char *str, t_parg parg, int w)
 	return (i);
 }
 
-static	size_t		r_print(int fd, char prepend, char *str, t_parg parg, int w)
+static	size_t		r_print(int fd, char prepend, char *str, t_parg parg)
 {
 	int		size;
 	size_t	i;
 	int		tmp;
+	size_t	w;
 
+	w = ft_strlen(str);
 	i = w;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
 	size = (prepend) ? size + 1 : size;
@@ -75,7 +79,7 @@ static	size_t		r_print(int fd, char prepend, char *str, t_parg parg, int w)
 		ft_putchar_fd(' ', fd);
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
 static size_t		bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
@@ -99,9 +103,9 @@ static size_t		bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 		ft_putstr_fd(str, fd);
 	}
 	else if (!ft_strchr(parg.flags, '-'))
-		i = l_print(fd, prepend, str, parg, w);
+		i = l_print(fd, prepend, str, parg);
 	else
-		i = r_print(fd, prepend, str, parg, w);
+		i = r_print(fd, prepend, str, parg);
 	free(str);
 	return (i);
 }

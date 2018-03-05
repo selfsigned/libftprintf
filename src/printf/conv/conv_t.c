@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:49:57 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/05 12:45:21 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/05 22:31:30 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ uintmax_t	conv_t_uint(t_parg parg, va_list ap)
 	uintmax_t r;
 
 	r = va_arg(ap, uintmax_t);
-	if (parg.type == 'D')
+	if (parg.type == 'U')
 		r = (unsigned long int)r;
 	else if (parg.length == hh)
 		r = (unsigned char)r;

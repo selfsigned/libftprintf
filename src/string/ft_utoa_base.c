@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 22:33:42 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/02 22:34:42 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/05 21:59:29 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char			*ft_utoa_base(uintmax_t n, char *base)
 	radix = ft_strlen(base);
 	nlen = ft_cntdigt_b(n, radix);
 	if (!(str = ft_strnew(nlen)))
-			return (NULL);
+		return (NULL);
 	while (nlen--)
 	{
 		str[nlen] = base[n % radix];
