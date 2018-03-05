@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_int.c                                         :+:      :+:    :+:   */
+/*   conv_uint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/05 12:43:08 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/05 12:51:17 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,12 @@ static size_t		bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 	size_t		i;
 	int			size;
 
-	str = ft_itoa_base(n, "0123456789");
+	if (parg.type == 'x')
+		str = ft_itoa_base(n, "0123456789abcdef");
+	else if (parg.type == 'X')
+		str = ft_itoa_base(n, "0123456789ABCDEF");
+	else
+		str = ft_itoa_base(n, "0123456789");
 	w = ft_strlen(str);
 	i = w;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
@@ -106,7 +111,7 @@ static size_t		bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
 	return (i);
 }
 
-size_t				conv_int(int fd, t_parg parg, va_list ap)
+size_t				conv_uint(int fd, t_parg parg, va_list ap)
 {
 	intmax_t	n;
 	char		prepend;
@@ -115,12 +120,7 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 	prepend = '\0';
 	prepend = ft_strchr(parg.flags, ' ') ? ' ' : prepend;
 	prepend = ft_strchr(parg.flags, '+') ? '+' : prepend;
-	n = conv_t_int(parg, ap);
-	if (n < 0)
-	{
-		n = -n;
-		prepend = '-';
-	}
+	n = conv_t_uint(parg, ap);
 	if (ft_strchr(parg.flags, '0'))
 	{
 		parg.prec = (prepend) ? parg.width - 1 : parg.width;

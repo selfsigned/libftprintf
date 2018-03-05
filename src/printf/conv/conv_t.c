@@ -6,13 +6,13 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:49:57 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/28 19:01:05 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/05 12:45:21 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-intmax_t	conv_t_int(va_list ap, t_parg parg)
+intmax_t	conv_t_int(t_parg parg, va_list ap)
 {
 	intmax_t r;
 
@@ -31,9 +31,31 @@ intmax_t	conv_t_int(va_list ap, t_parg parg)
 		r = (size_t)r;
 	else if (parg.length == j)
 		r = (intmax_t)r;
-	else if (parg.length == j)
-		r = (intmax_t)r;
 	else
 		r = (int)r;
+	return (r);
+}
+
+uintmax_t	conv_t_uint(t_parg parg, va_list ap)
+{
+	uintmax_t r;
+
+	r = va_arg(ap, uintmax_t);
+	if (parg.type == 'D')
+		r = (unsigned long int)r;
+	else if (parg.length == hh)
+		r = (unsigned char)r;
+	else if (parg.length == h)
+		r = (unsigned short int)r;
+	else if (parg.length == l)
+		r = (unsigned long int)r;
+	else if (parg.length == ll)
+		r = (unsigned long long)r;
+	else if (parg.length == z)
+		r = (size_t)r;
+	else if (parg.length == j)
+		r = (uintmax_t)r;
+	else
+		r = (unsigned int)r;
 	return (r);
 }

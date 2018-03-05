@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/03/02 22:32:44 by xperrin          ###   ########.fr        #
+#    Updated: 2018/03/05 12:47:04 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ PRINTFP = $(SRCDIR)/printf
 PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse $(PRINTFP)/conv
 PRINTF_FUN = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
 PRINTF_PARSE = readarg.c printarg.c
-PRINTF_CONV = conv_t.c conv_char.c conv_string.c conv_int.c
+PRINTF_CONV = conv_t.c conv_char.c conv_string.c conv_int.c conv_uint.c
 PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE) $(PRINTF_CONV)
 
 OBJDIR = obj
