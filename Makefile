@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/03/05 12:47:04 by xperrin          ###   ########.fr        #
+#    Updated: 2018/03/06 19:17:36 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ FT_STR = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 	ft_strupcase.c ft_strlowcase.c ft_toupper.c ft_tolower.c \
 	ft_strnew.c ft_strdel.c ft_strclr.c \
 	ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c \
-	ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c \
+	ft_strequ.c ft_strnequ.c ft_strsub.c \
+	ft_strjoin.c ft_strjoinfreea.c ft_strjoinfreeb.c \
 	ft_strtrim.c ft_strsplit.c ft_itoa.c ft_itoa_base.c ft_utoa_base.c \
 	ft_cntword.c ft_strrlen.c ft_strndup.c ft_strdeltab.c
 

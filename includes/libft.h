@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 20:10:52 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/02 22:34:53 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/06 19:11:54 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ size_t				ft_strrlen(char const *s, char c);
 char				*ft_strndup(char const *s, size_t n);
 char				*ft_strupcase(char *s);
 char				*ft_strlowcase(char *s);
+char				*ft_strjoinfreea(char *s1, char *s2);
+char				*ft_strjoinfreeb(char *s1, char *s2);
 int					ft_cntdigit(int n);
 char				*ft_itoa_base(intmax_t n, char *base);
 char				*ft_utoa_base(uintmax_t n, char *base);

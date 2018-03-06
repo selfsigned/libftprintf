@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printarg.c                                         :+:      :+:    :+:   */
+/*   ft_strjoinfreea.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/18 17:23:40 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/06 18:52:55 by xperrin          ###   ########.fr       */
+/*   Created: 2018/03/06 19:13:46 by xperrin           #+#    #+#             */
+/*   Updated: 2018/03/06 19:14:42 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-size_t	printf_printarg(int fd, t_parg parg, va_list ap)
+char		*ft_strjoinfreea(char *s1, char *s2)
 {
-	if (ft_strchr("c%", parg.type))
-		return (conv_char(fd, parg, ap));
-	else if (parg.type == 's')
-		return (conv_string(fd, parg, ap));
-	else if (ft_strchr("idD", parg.type))
-		return (conv_int(fd, parg, ap));
-	else if (ft_strchr("uUxXp", parg.type))
-		return (conv_uint(fd, parg, ap));
-	return (0);
+	s2 = ft_strjoin(s1, s2);
+	free(s1);
+	return (s2);
 }
