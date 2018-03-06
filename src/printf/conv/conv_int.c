@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/05 22:17:52 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/06 18:42:17 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static	size_t		l_print(int fd, char prepend, char *str, t_parg parg)
 		i++;
 	}
 	ft_putstr_fd(str, fd);
-	return (i);
+	free(str);
+	return ((prepend) ? i + 1 : i);
 }
 
 static	size_t		r_print(int fd, char prepend, char *str, t_parg parg)
@@ -79,42 +80,34 @@ static	size_t		r_print(int fd, char prepend, char *str, t_parg parg)
 		ft_putchar_fd(' ', fd);
 		i++;
 	}
-	return (i);
+	free(str);
+	return ((prepend) ? i + 1 : i);
 }
 
-static size_t		bloat_print(int fd, intmax_t n, char prepend, t_parg parg)
+static size_t		prec_print(int fd, char prepend, char *str, t_parg parg)
 {
-	char		*str;
 	size_t		w;
 	size_t		i;
 	int			size;
 
-	str = ft_itoa_base(n, "0123456789");
 	w = ft_strlen(str);
 	i = w;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
 	size = (prepend) ? size + 1 : size;
-	if (parg.prec >= parg.width && parg.prec > (int)w)
-	{
-		(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
-		i = (!(i - 1)) ? i : i - 1;
-		while (i++ && parg.prec-- > (int)w)
-			ft_putchar_fd('0', fd);
-		ft_putstr_fd(str, fd);
-	}
-	else if (!ft_strchr(parg.flags, '-'))
-		i = l_print(fd, prepend, str, parg);
-	else
-		i = r_print(fd, prepend, str, parg);
+	(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
+	i = (!(i - 1)) ? i : i - 1;
+	while (i++ && parg.prec-- > (int)w)
+		ft_putchar_fd('0', fd);
+	ft_putstr_fd(str, fd);
 	free(str);
-	return (i);
+	return ((prepend) ? i + 1 : i);
 }
 
 size_t				conv_int(int fd, t_parg parg, va_list ap)
 {
 	intmax_t	n;
 	char		prepend;
-	size_t		w;
+	char		*str;
 
 	prepend = '\0';
 	prepend = ft_strchr(parg.flags, ' ') ? ' ' : prepend;
@@ -130,6 +123,11 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 		parg.prec = (prepend) ? parg.width - 1 : parg.width;
 		parg.width = 0;
 	}
-	w = bloat_print(fd, n, prepend, parg);
-	return ((prepend) ? w + 1 : w);
+	str = ft_itoa_base(n, "0123456789");
+	if (parg.prec >= parg.width && parg.prec > (int)ft_strlen(str))
+		return (prec_print(fd, prepend, str, parg));
+	else if (!ft_strchr(parg.flags, '-'))
+		return (l_print(fd, prepend, str, parg));
+	else
+		return (r_print(fd, prepend, str, parg));
 }
