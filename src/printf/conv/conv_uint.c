@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/09 17:43:34 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/09 23:26:44 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,26 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
 {
 	char		*str;
-	size_t		w;
 	size_t		i;
-	int			size;
 
 	if (parg.type == 'x')
-		str = ft_utoa_base(n, "0123456789abcdef");
+		str = (ft_strchr(parg.flags, '#')) ?
+				ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789abcdef")) :
+				ft_utoa_base(n, "0123456789abcdef");
 	else if (parg.type == 'X')
-		str = ft_utoa_base(n, "0123456789ABCDEF");
+		str = (ft_strchr(parg.flags, '#')) ?
+				ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789ABCDEF")) :
+				ft_utoa_base(n, "0123456789ABCDEF");
+	else if (parg.type == 'o' || parg.type == 'O')
+		if (ft_strchr(parg.flags, '#'))
+			str = ft_strjoinfreeb("0", ft_utoa_base(n, "01234567"));
+		else
+			str = ft_utoa_base(n, "01234567");
 	else if (parg.type == 'p')
 		str = ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789abcdef"));
 	else
 		str = ft_utoa_base(n, "0123456789");
-	w = ft_strlen(str);
-	i = w;
-	size = (parg.prec > (int)w) ? parg.prec : (int)w;
+	i = ft_strlen(str);
 	if (!ft_strchr(parg.flags, '-'))
 		i = l_print(fd, str, parg);
 	else
