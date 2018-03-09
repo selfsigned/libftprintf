@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/06 18:42:17 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/09 17:42:22 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **
 ** Precision only:
 ** p > w and p > d, basically just zeroes
-** (might be the same than left aligned)
+** (same than left aligned)
 **
 ** Left aligned: (default)
 ** ' ' | 'prepend' | '0' | itoa(d)
@@ -84,25 +84,6 @@ static	size_t		r_print(int fd, char prepend, char *str, t_parg parg)
 	return ((prepend) ? i + 1 : i);
 }
 
-static size_t		prec_print(int fd, char prepend, char *str, t_parg parg)
-{
-	size_t		w;
-	size_t		i;
-	int			size;
-
-	w = ft_strlen(str);
-	i = w;
-	size = (parg.prec > (int)w) ? parg.prec : (int)w;
-	size = (prepend) ? size + 1 : size;
-	(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
-	i = (!(i - 1)) ? i : i - 1;
-	while (i++ && parg.prec-- > (int)w)
-		ft_putchar_fd('0', fd);
-	ft_putstr_fd(str, fd);
-	free(str);
-	return ((prepend) ? i + 1 : i);
-}
-
 size_t				conv_int(int fd, t_parg parg, va_list ap)
 {
 	intmax_t	n;
@@ -124,9 +105,7 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 		parg.width = 0;
 	}
 	str = ft_itoa_base(n, "0123456789");
-	if (parg.prec >= parg.width && parg.prec > (int)ft_strlen(str))
-		return (prec_print(fd, prepend, str, parg));
-	else if (!ft_strchr(parg.flags, '-'))
+	if (!ft_strchr(parg.flags, '-'))
 		return (l_print(fd, prepend, str, parg));
 	else
 		return (r_print(fd, prepend, str, parg));

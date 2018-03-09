@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/06 19:16:45 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/09 17:43:34 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **
 ** Precision only:
 ** p > w and p > d, basically just zeroes
-** (might be the same than left aligned)
+** (same than left aligned)
 **
 ** Left aligned: (default)
 ** ' ' | 'prepend' | '0' | itoa(d)
@@ -95,14 +95,7 @@ static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
 	w = ft_strlen(str);
 	i = w;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
-	if (parg.prec >= parg.width && parg.prec > (int)w)
-	{
-		i = (!(i - 1)) ? i : i - 1;
-		while (i++ && parg.prec-- > (int)w)
-			ft_putchar_fd('0', fd);
-		ft_putstr_fd(str, fd);
-	}
-	else if (!ft_strchr(parg.flags, '-'))
+	if (!ft_strchr(parg.flags, '-'))
 		i = l_print(fd, str, parg);
 	else
 		i = r_print(fd, str, parg);
