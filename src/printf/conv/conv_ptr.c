@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conv_uint.c                                        :+:      :+:    :+:   */
+/*   conv_ptr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/12 23:35:50 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/12 23:39:03 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,13 @@ static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
 	char		*str;
 	size_t		i;
 
-	if (!parg.prec && !n)
-		str = ft_strdup("\0");
-	else if (parg.type == 'x')
-		str = ft_utoa_base(n, "0123456789abcdef");
-	else if (parg.type == 'X')
-		str = ft_utoa_base(n, "0123456789ABCDEF");
-	else if (parg.type == 'o' || parg.type == 'O')
-		if (ft_strchr(parg.flags, '#') && n)
-			str = ft_strjoinfreeb("0", ft_utoa_base(n, "01234567"));
-		else
-		str = ft_utoa_base(n, "01234567");
+	if (parg.type == 'X')
+		str = ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789ABCDEF"));
+	else if (parg.type == 'p')
+		str = (n) ? ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789abcdef"))
+			: ft_strdup("(nil)");
 	else
-		str = ft_utoa_base(n, "0123456789");
+		str = ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789abcdef"));
 	i = ft_strlen(str);
 	if (!ft_strchr(parg.flags, '-'))
 		i = l_print(fd, str, parg);
@@ -104,7 +98,7 @@ static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
 	return (i);
 }
 
-size_t				conv_uint(int fd, t_parg parg, va_list ap)
+size_t				conv_ptr(int fd, t_parg parg, va_list ap)
 {
 	intmax_t	n;
 	size_t		w;
