@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/09 23:26:44 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/12 18:12:16 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
 	char		*str;
 	size_t		i;
 
-	if (parg.type == 'x')
+	if (!parg.prec && !n)
+		str = ft_strdup("\0");
+	else if (parg.type == 'x')
 		str = (ft_strchr(parg.flags, '#')) ?
 				ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789abcdef")) :
 				ft_utoa_base(n, "0123456789abcdef");

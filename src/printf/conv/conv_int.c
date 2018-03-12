@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/09 17:42:22 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/12 18:20:32 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 		n = -n;
 		prepend = '-';
 	}
+	str = (!n && !parg.prec) ? ft_strdup("\0") : ft_itoa_base(n, "0123456789");
 	if (ft_strchr(parg.flags, '0'))
 	{
 		parg.prec = (prepend) ? parg.width - 1 : parg.width;
 		parg.width = 0;
 	}
-	str = ft_itoa_base(n, "0123456789");
 	if (!ft_strchr(parg.flags, '-'))
 		return (l_print(fd, prepend, str, parg));
 	else
