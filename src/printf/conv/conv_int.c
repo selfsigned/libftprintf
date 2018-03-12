@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/12 18:43:35 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/12 19:44:47 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 	intmax_t	n;
 	char		prepend;
 	char		*str;
-	char		*tmp;
 
 	prepend = '\0';
 	prepend = ft_strchr(parg.flags, ' ') ? ' ' : prepend;
@@ -98,9 +97,7 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 	str = (!n && !parg.prec) ? ft_strdup("\0") : ft_itoa_base(n, "0123456789");
 	if (n < 0)
 	{
-		tmp = str;
-		str = ft_strsub(str, 1, ft_strlen(str));
-		free(tmp);
+		str = ft_strsubfree(str, 1, ft_strlen(str));
 		prepend = '-';
 	}
 	if (ft_strchr(parg.flags, '0'))

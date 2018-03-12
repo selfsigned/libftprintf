@@ -6,7 +6,7 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/03/06 19:17:36 by xperrin          ###   ########.fr        #
+#    Updated: 2018/03/12 19:51:48 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,9 @@ FT_STR = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c \
 	ft_strupcase.c ft_strlowcase.c ft_toupper.c ft_tolower.c \
 	ft_strnew.c ft_strdel.c ft_strclr.c \
 	ft_striter.c ft_striteri.c ft_strmap.c ft_strmapi.c \
-	ft_strequ.c ft_strnequ.c ft_strsub.c \
-	ft_strjoin.c ft_strjoinfreea.c ft_strjoinfreeb.c \
+	ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c \
 	ft_strtrim.c ft_strsplit.c ft_itoa.c ft_itoa_base.c ft_utoa_base.c \
-	ft_cntword.c ft_strrlen.c ft_strndup.c ft_strdeltab.c
+	ft_cntword.c ft_strrlen.c ft_strndup.c
 
 DISPDIR = $(SRCDIR)/display
 FT_DISP = ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
@@ -48,6 +47,9 @@ FT_DISP = ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
 LSTDIR = $(SRCDIR)/list
 FT_LST = ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c \
 	ft_lstiter.c ft_lstmap.c
+
+LEAKDIR = $(SRCDIR)/leak
+FT_LEAK = ft_strsubfree.c ft_strjoinfreea.c ft_strjoinfreeb.c ft_strdeltab.c
 
 MATHDIR = $(SRCDIR)/math
 FT_MATH = ft_cntdigit.c ft_pow.c ft_sqrt.c
@@ -63,9 +65,9 @@ PRINTF_CONV = conv_t.c conv_char.c conv_string.c conv_int.c conv_uint.c
 PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE) $(PRINTF_CONV)
 
 OBJDIR = obj
-VPATH = $(MEMDIR):$(STRDIR):$(DISPDIR):$(LSTDIR):$(MATHDIR):\
+VPATH = $(MEMDIR):$(STRDIR):$(DISPDIR):$(LSTDIR):$(LEAKDIR):$(MATHDIR):\
 	$(GNLDIR):$(PRINTFDIR)
-SRC = $(FT_MEM) $(FT_STR) $(FT_DISP) $(FT_LST) $(FT_MATH) $(GNL) $(PRINTF)
+SRC = $(FT_MEM) $(FT_STR) $(FT_DISP) $(FT_LST) $(FT_MATH) $(FT_LEAK) $(GNL) $(PRINTF)
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 # Dude colors lmao

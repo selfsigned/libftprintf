@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 20:10:52 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/06 19:11:54 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/12 19:48:50 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 /*
-** My functions
+** My string functions
 */
 int					ft_islower(int chr);
 int					ft_isupper(int chr);
@@ -103,13 +103,20 @@ size_t				ft_strrlen(char const *s, char c);
 char				*ft_strndup(char const *s, size_t n);
 char				*ft_strupcase(char *s);
 char				*ft_strlowcase(char *s);
-char				*ft_strjoinfreea(char *s1, char *s2);
-char				*ft_strjoinfreeb(char *s1, char *s2);
-int					ft_cntdigit(int n);
 char				*ft_itoa_base(intmax_t n, char *base);
 char				*ft_utoa_base(uintmax_t n, char *base);
+/*
+** My leak-free functions
+*/
+char				*ft_strjoinfreea(char *s1, char *s2);
+char				*ft_strjoinfreeb(char *s1, char *s2);
+char				*ft_strsubfree(char *s, unsigned int start, size_t len);
+void				ft_strdeltab(char **tab, size_t tab_len);
+/*
+** My math functions
+*/
+int					ft_cntdigit(int n);
 int					ft_pow(int x, int y);
 int					ft_sqrt(int x);
-void				ft_strdeltab(char **tab, size_t tab_len);
 
 #endif
