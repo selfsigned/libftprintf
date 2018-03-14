@@ -6,14 +6,14 @@
 #    By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/04 19:33:10 by xperrin           #+#    #+#              #
-#    Updated: 2018/03/12 23:32:32 by xperrin          ###   ########.fr        #
+#    Updated: 2018/03/14 22:09:15 by xperrin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 SONAME = $(NAME:.a=.so)
 DNAME = $(NAME)
-CC = clang
+# CC = clang
 CFLAGS = -Wall -Wextra -Wpedantic -g
 INCDIR = includes
 #PRINTFINC = printf.h printf_structs.h printf_helpers.h printf_conv.h
