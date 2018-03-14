@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/12 23:39:03 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/14 18:48:17 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ static	size_t		l_print(int fd, char *str, t_parg parg)
 	w = ft_strlen(str);
 	i = w;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
-	while (parg.width-- - size > 0)
+	while (parg.width-- - (size + 2) > 0)
 	{
 		ft_putchar_fd(' ', fd);
 		i++;
 	}
+	ft_putstr("0x");
+	i += 2;
 	while (size-- - w > 0)
 	{
 		ft_putchar_fd('0', fd);
@@ -59,10 +61,11 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 	int		tmp;
 	size_t	w;
 
+	ft_putstr("0x");
 	w = ft_strlen(str);
-	i = w;
+	i = (parg.prec > (int)w + 2) ? w : w + 2;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
-	tmp = size;
+	tmp = size + 2;
 	while (size-- - w > 0)
 	{
 		ft_putchar_fd('0', fd);
@@ -77,18 +80,25 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 	return (i);
 }
 
+/*
+** "%p", NULL
+** MacOS: 0x0
+** glibc: (nil)
+**
+** And it does matter for moulitest, POSIX is dead.
+*/
+
 static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
 {
 	char		*str;
 	size_t		i;
 
 	if (parg.type == 'X')
-		str = ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789ABCDEF"));
+		str = ft_utoa_base(n, "0123456789ABCDEF");
 	else if (parg.type == 'p')
-		str = (n) ? ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789abcdef"))
-			: ft_strdup("(nil)");
+		str = ft_utoa_base(n, "0123456789abcdef");
 	else
-		str = ft_strjoinfreeb("0x", ft_utoa_base(n, "0123456789abcdef"));
+		str = ft_utoa_base(n, "0123456789abcdef");
 	i = ft_strlen(str);
 	if (!ft_strchr(parg.flags, '-'))
 		i = l_print(fd, str, parg);
@@ -106,7 +116,7 @@ size_t				conv_ptr(int fd, t_parg parg, va_list ap)
 	n = conv_t_uint(parg, ap);
 	if (ft_strchr(parg.flags, '0'))
 	{
-		parg.prec = parg.width;
+		parg.prec = parg.width - 2;
 		parg.width = 0;
 	}
 	w = bloat_print(fd, n, parg);
