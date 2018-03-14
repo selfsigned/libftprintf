@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/12 23:35:50 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/14 19:25:00 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
 		if (ft_strchr(parg.flags, '#') && n)
 			str = ft_strjoinfreeb("0", ft_utoa_base(n, "01234567"));
 		else
-		str = ft_utoa_base(n, "01234567");
+			str = ft_utoa_base(n, "01234567");
 	else
 		str = ft_utoa_base(n, "0123456789");
 	i = ft_strlen(str);
@@ -106,8 +106,8 @@ static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
 
 size_t				conv_uint(int fd, t_parg parg, va_list ap)
 {
-	intmax_t	n;
-	size_t		w;
+	uintmax_t	n;
+	char		*str;
 
 	n = conv_t_uint(parg, ap);
 	if (ft_strchr(parg.flags, '0'))
@@ -115,6 +115,20 @@ size_t				conv_uint(int fd, t_parg parg, va_list ap)
 		parg.prec = parg.width;
 		parg.width = 0;
 	}
-	w = bloat_print(fd, n, parg);
-	return (w);
+	if (!parg.prec && !n)
+		str = ft_strdup("\0");
+	else if (parg.type == 'x' || parg.type == 'X')
+		str = (parg.type == 'x') ? ft_utoa_base(n, "0123456789abcdef")
+			: ft_utoa_base(n, "0123456789ABCDEF");
+	else if (parg.type == 'o' || parg.type == 'O')
+		str = (ft_strchr(parg.flags, '#') && n) ? ft_strjoinfreeb("0",
+				ft_utoa_base(n, "01234567")) : ft_utoa_base(n, "01234567");
+	else
+		str = ft_utoa_base(n, "0123456789");
+	if (!ft_strchr(parg.flags, '-'))
+		n = l_print(fd, str, parg);
+	else
+		n = r_print(fd, str, parg);
+	free(str);
+	return (n);
 }

@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/14 18:48:17 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/14 19:39:51 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,30 +88,10 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 ** And it does matter for moulitest, POSIX is dead.
 */
 
-static size_t		bloat_print(int fd, intmax_t n, t_parg parg)
-{
-	char		*str;
-	size_t		i;
-
-	if (parg.type == 'X')
-		str = ft_utoa_base(n, "0123456789ABCDEF");
-	else if (parg.type == 'p')
-		str = ft_utoa_base(n, "0123456789abcdef");
-	else
-		str = ft_utoa_base(n, "0123456789abcdef");
-	i = ft_strlen(str);
-	if (!ft_strchr(parg.flags, '-'))
-		i = l_print(fd, str, parg);
-	else
-		i = r_print(fd, str, parg);
-	free(str);
-	return (i);
-}
-
 size_t				conv_ptr(int fd, t_parg parg, va_list ap)
 {
-	intmax_t	n;
-	size_t		w;
+	uintmax_t	n;
+	char		*str;
 
 	n = conv_t_uint(parg, ap);
 	if (ft_strchr(parg.flags, '0'))
@@ -119,6 +99,16 @@ size_t				conv_ptr(int fd, t_parg parg, va_list ap)
 		parg.prec = parg.width - 2;
 		parg.width = 0;
 	}
-	w = bloat_print(fd, n, parg);
-	return (w);
+	if (!n && !parg.prec)
+		str = ft_strdup("\0");
+	else if (parg.type == 'X')
+		str = ft_utoa_base(n, "0123456789ABCDEF");
+	else
+		str = ft_utoa_base(n, "0123456789abcdef");
+	if (!ft_strchr(parg.flags, '-'))
+		n = l_print(fd, str, parg);
+	else
+		n = r_print(fd, str, parg);
+	free(str);
+	return (n);
 }
