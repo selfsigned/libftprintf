@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/14 21:52:11 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/14 22:50:59 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static	size_t		l_print(int fd, char *str, t_parg parg)
 		ft_putchar_fd(' ', fd);
 		i++;
 	}
-	ft_putstr("0x");
+	(parg.type == 'X') ? ft_putstr_fd("0X", fd) : ft_putstr_fd("0x", fd);
 	i += 2;
 	while (size-- - w > 0)
 	{
@@ -61,7 +61,7 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 	int		tmp;
 	size_t	w;
 
-	ft_putstr("0x");
+	(parg.type == 'X') ? ft_putstr_fd("0x", fd) : ft_putstr_fd("0x", fd);
 	w = ft_strlen(str);
 	i = (parg.prec > (int)w + 2) ? w : w + 2;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
@@ -80,6 +80,11 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 	return (i);
 }
 
+/*
+** Function for #.0x
+** str is freed in uint_*_print
+*/
+
 static	size_t		null_hexa_prec(int fd, uintmax_t n, t_parg parg)
 {
 	char	*str;
@@ -89,7 +94,6 @@ static	size_t		null_hexa_prec(int fd, uintmax_t n, t_parg parg)
 		n = uint_l_print(fd, str, parg);
 	else
 		n = uint_r_print(fd, str, parg);
-	free(str);
 	return (n);
 }
 

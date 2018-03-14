@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/12 19:44:47 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/14 22:32:33 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static	size_t		r_print(int fd, char prepend, char *str, t_parg parg)
 	size = (prepend) ? size + 1 : size;
 	(prepend) ? ft_putchar_fd(prepend, fd) : (void)42;
 	tmp = size;
+	w += (prepend) ? 1 : 0;
 	while (size-- - w > 0)
 	{
 		ft_putchar_fd('0', fd);
