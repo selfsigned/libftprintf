@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/14 19:39:51 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/14 21:52:11 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,19 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 	return (i);
 }
 
+static	size_t		null_hexa_prec(int fd, uintmax_t n, t_parg parg)
+{
+	char	*str;
+
+	str = (parg.prec) ? ft_strdup("0") : ft_strdup("\0");
+	if (!ft_strchr(parg.flags, '-'))
+		n = uint_l_print(fd, str, parg);
+	else
+		n = uint_r_print(fd, str, parg);
+	free(str);
+	return (n);
+}
+
 /*
 ** "%p", NULL
 ** MacOS: 0x0
@@ -99,7 +112,10 @@ size_t				conv_ptr(int fd, t_parg parg, va_list ap)
 		parg.prec = parg.width - 2;
 		parg.width = 0;
 	}
-	if (!n && !parg.prec)
+	if ((parg.type == 'x' || parg.type == 'X')
+			&& !n && parg.prec <= 0)
+		return (null_hexa_prec(fd, n, parg));
+	else if (!n && !parg.prec)
 		str = ft_strdup("\0");
 	else if (parg.type == 'X')
 		str = ft_utoa_base(n, "0123456789ABCDEF");
