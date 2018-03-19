@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/16 17:07:14 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/19 23:10:17 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 		str = ft_strsubfree(str, 1, ft_strlen(str));
 		prepend = '-';
 	}
-	if (ft_strchr(parg.flags, '0') && !ft_strchr(parg.flags, '-'))
+	if (parg.prec && ft_strchr(parg.flags, '0') && !ft_strchr(parg.flags, '-'))
 	{
 		parg.prec = (prepend) ? parg.width - 1 : parg.width;
 		parg.width = 0;

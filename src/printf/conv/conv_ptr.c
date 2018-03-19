@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/16 17:09:43 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/19 23:11:55 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ size_t				conv_ptr(int fd, t_parg parg, va_list ap)
 	char		*str;
 
 	n = conv_t_uint(parg, ap);
-	if (ft_strchr(parg.flags, '0') && !ft_strchr(parg.flags, '-'))
+	if (parg.prec && ft_strchr(parg.flags, '0') && !ft_strchr(parg.flags, '-'))
 	{
 		parg.prec = parg.width - 2;
 		parg.width = 0;
