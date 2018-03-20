@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/19 23:10:17 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/20 19:32:12 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ static	size_t		r_print(int fd, char prepend, char *str, t_parg parg)
 	return ((prepend) ? i + 1 : i);
 }
 
+t_parg				zeroflag_handler(t_parg parg, char prepend)
+{
+	parg.prec = (prepend) ? parg.width - 1 : parg.width;
+	parg.width = 0;
+	return (parg);
+}
+
 size_t				conv_int(int fd, t_parg parg, va_list ap)
 {
 	intmax_t	n;
@@ -101,11 +108,9 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 		str = ft_strsubfree(str, 1, ft_strlen(str));
 		prepend = '-';
 	}
-	if (parg.prec && ft_strchr(parg.flags, '0') && !ft_strchr(parg.flags, '-'))
-	{
-		parg.prec = (prepend) ? parg.width - 1 : parg.width;
-		parg.width = 0;
-	}
+	if (parg.prec == -1 && ft_strchr(parg.flags, '0')
+			&& !ft_strchr(parg.flags, '-'))
+		parg = zeroflag_handler(parg, prepend);
 	if (!ft_strchr(parg.flags, '-'))
 		return (l_print(fd, prepend, str, parg));
 	else

@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/19 23:11:24 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/20 19:43:07 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,9 @@ size_t		conv_uint(int fd, t_parg parg, va_list ap)
 	char		*str;
 
 	n = conv_t_uint(parg, ap);
-	if (parg.prec && ft_strchr(parg.flags, '0') && !ft_strchr(parg.flags, '-'))
-	{
-		parg.prec = parg.width;
-		parg.width = 0;
-	}
+	if (parg.prec == -1 && ft_strchr(parg.flags, '0')
+			&& !ft_strchr(parg.flags, '-'))
+		parg = zeroflag_handler(parg, 0);
 	if (!parg.prec && !n && !(ft_strchr(parg.flags, '#')
 				&& (parg.type == 'o' || parg.type == 'O')))
 		str = ft_strdup("\0");

@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:07:29 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/14 20:50:47 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/20 19:29:53 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ size_t		conv_uint(int fd, t_parg parg, va_list ap);
 
 size_t		uint_l_print(int fd, char *str, t_parg parg);
 size_t		uint_r_print(int fd, char *str, t_parg parg);
+t_parg		zeroflag_handler(t_parg parg, char prepend);
+
 #endif
