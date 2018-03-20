@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:57:10 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/20 14:35:10 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/20 20:15:59 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ t_parg				printf_readarg(size_t i, const char *fmt)
 {
 	t_parg	parg;
 
+	parg.error = 0;
+	parg.convlen = i;
 	i += p_flags(fmt + i, &parg);
 	parg.width = 0;
 	if (ft_isdigit(fmt[i]))
@@ -78,7 +80,10 @@ t_parg				printf_readarg(size_t i, const char *fmt)
 			i++;
 	}
 	i += p_length(fmt + i, &parg);
-	parg.type = (ft_isalnum(fmt[i]) || fmt[i] == '%') ? fmt[i++] : 0;
+	if (ft_isalnum(fmt[i]) || fmt[i] == '%')
+		parg.type = fmt[i++];
+	else
+		parg.error = 1;
 	parg.convlen = i;
 	return (parg);
 }

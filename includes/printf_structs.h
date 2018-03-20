@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 01:56:57 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/18 22:08:49 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/20 20:03:48 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_parg
 	t_length	length;
 	char		type;
 	size_t		convlen;
+	int			error;
 }				t_parg;
 
 #endif
