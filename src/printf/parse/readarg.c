@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:57:10 by xperrin           #+#    #+#             */
-/*   Updated: 2018/02/28 18:57:12 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/20 10:23:30 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_parg				printf_readarg(size_t i, const char *fmt)
 			i++;
 	}
 	i += p_length(fmt + i, &parg);
-	parg.type = fmt[i++];
+	parg.type = (ft_isalnum(fmt[i])) ? fmt[i++] : 0;
 	parg.convlen = i;
 	return (parg);
 }
