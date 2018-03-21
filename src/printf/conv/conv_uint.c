@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/20 19:43:07 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/21 23:42:48 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ size_t		conv_uint(int fd, t_parg parg, va_list ap)
 		str = (ft_strchr(parg.flags, '#') && n) ? ft_strjoinfreeb("0",
 			ft_utoa_base(n, "01234567")) : ft_utoa_base(n, "01234567");
 	else
-		str = ft_utoa_base(n, "0123456789");
+		str = ft_utoa_base(n, (parg.type == 'b') ? "01" : "0123456789");
 	if (!ft_strchr(parg.flags, '-'))
 		n = uint_l_print(fd, str, parg);
 	else

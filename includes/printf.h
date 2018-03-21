@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 17:57:28 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/05 21:52:52 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/21 23:30:17 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "printf_structs.h"
 # include "printf_conv.h"
 
-# define CONV_LST "sSpdDioOuUxXcC%"
+# define CONV_LST "sSpdDioOuUxXcC%b"
 
 /*
 ** printf is a variadic function (look it up on google)
