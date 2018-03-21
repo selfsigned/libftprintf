@@ -1,5 +1,4 @@
-# Libft/GNL
-[![Build Status](https://travis-ci.com/selfsigned/libftprintf.svg?token=JKEswLKAuxBcL3YjR9AE&branch=master)](https://travis-ci.com/xperrin/libftprintf)
+# Libft/GNL/Printf [![Build Status](https://travis-ci.com/selfsigned/libftprintf.svg?token=JKEswLKAuxBcL3YjR9AE&branch=master)](https://travis-ci.com/selfsigned/libftprintf)
 My libft and GNL projects as a single lib
 
 # GNL
@@ -8,6 +7,16 @@ My libft and GNL projects as a single lib
 | SYNOPSIS      | int get\_next\_line(const int fd, char **line)                                                                                                                                              |
 | DESCRIPTION   | the __get\_next\_line()__ function stores the content of a line (array of char ending with a newline or EOF) __without the trailing newline__ read from __fd__ into the address of __line__ |
 | RETURN VALUES |  1 if a line has been read, 0 if the reading has been completed, -1 if an error happened                                                                                                    |
+
+# Printf
+### Handled types
+__cCsSpdDioOuUxXb%__
+
+### Functions
+- ft_dprintf
+- ft_vdprintf
+- ft_printf
+- ft_vprintf
 
 # Libft
 ## Bonus functions
