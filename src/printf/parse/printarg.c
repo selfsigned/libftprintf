@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 17:23:40 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/21 23:41:57 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/22 01:11:54 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	printf_printarg(int fd, t_parg parg, va_list ap)
 {
-	if (ft_strchr("c%", parg.type))
+	if (ft_strchr("Cc%", parg.type))
 		return (conv_char(fd, parg, ap));
 	else if (parg.type == 's')
 		return (conv_string(fd, parg, ap));

@@ -1,4 +1,5 @@
 # **************************************************************************** #
+# Makefile
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -61,7 +62,7 @@ PRINTFP = $(SRCDIR)/printf
 PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse $(PRINTFP)/conv
 PRINTF_FUN = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
 PRINTF_PARSE = readarg.c printarg.c
-PRINTF_CONV = conv_t.c conv_char.c conv_string.c conv_int.c conv_uint.c conv_ptr.c
+PRINTF_CONV = conv_t.c conv_char.c conv_string.c conv_int.c conv_uint.c conv_ptr.c conv_unicode.c
 PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE) $(PRINTF_CONV)
 
 OBJDIR = obj

@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 17:57:28 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/21 23:30:17 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/26 01:26:06 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "printf_structs.h"
 # include "printf_conv.h"
+# include <wchar.h>
 
 # define CONV_LST "sSpdDioOuUxXcC%b"
 
