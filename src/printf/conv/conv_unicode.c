@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 01:11:32 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/27 20:27:47 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 21:55:35 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ size_t	conv_unicode(unsigned char *d, unsigned int n)
 		/* ft_printf("binary output result: %b %b %b %b\n", d[0], d[1], d[2], d[3]); */
 		return (4);
 	}
-	/* ft_printf("something went wrong"); */
-	return(1);
+	d[0] = 0xEF;
+	d[1] = 0xBF;
+	d[2] = 0xBD;
+	return (3);
 }

@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 17:57:28 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/27 15:38:54 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 22:04:31 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 # include "printf_structs.h"
 # include "printf_conv.h"
-# include <wchar.h>
 
 # define CONV_LST "sSpdDioOuUxXcC%b"
 
@@ -32,9 +31,10 @@
 # include <stdarg.h>
 
 /*
-** Needed for intmax_t
+** Needed for intmax_t and unicode chars
 */
 # include <inttypes.h>
+# include <wchar.h>
 
 int				ft_printf(const char *format, ...);
 int				ft_dprintf(int fd, const char *format, ...);
