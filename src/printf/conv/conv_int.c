@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/20 19:32:12 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 15:36:36 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,10 @@ size_t				conv_int(int fd, t_parg parg, va_list ap)
 	prepend = ft_strchr(parg.flags, ' ') ? ' ' : prepend;
 	prepend = ft_strchr(parg.flags, '+') ? '+' : prepend;
 	n = conv_t_int(parg, ap);
-	str = (!n && !parg.prec) ? ft_strdup("\0") : ft_itoa_base(n, "0123456789");
+	if (parg.type == 'b')
+		str = (!n && !parg.prec) ? ft_strdup("\0") : ft_itoa_base(n, B_BIN);
+	else
+		str = (!n && !parg.prec) ? ft_strdup("\0") : ft_itoa_base(n, B_DEC);
 	if (n < 0)
 	{
 		str = ft_strsubfree(str, 1, ft_strlen(str));

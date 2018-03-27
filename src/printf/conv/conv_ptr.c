@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/20 19:43:56 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 15:42:41 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,9 @@ size_t				conv_ptr(int fd, t_parg parg, va_list ap)
 	else if (!n && !parg.prec)
 		str = ft_strdup("\0");
 	else if (parg.type == 'X')
-		str = ft_utoa_base(n, "0123456789ABCDEF");
+		str = ft_utoa_base(n, B_HEX_U);
 	else
-		str = ft_utoa_base(n, "0123456789abcdef");
+		str = ft_utoa_base(n, B_HEX_L);
 	if (!ft_strchr(parg.flags, '-'))
 		n = l_print(fd, str, parg);
 	else

@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 17:23:40 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/22 01:11:54 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 15:31:50 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ size_t	printf_printarg(int fd, t_parg parg, va_list ap)
 		return (conv_char(fd, parg, ap));
 	else if (parg.type == 's')
 		return (conv_string(fd, parg, ap));
-	else if (ft_strchr("idD", parg.type))
+	else if (ft_strchr("idDb", parg.type))
 		return (conv_int(fd, parg, ap));
 	else if ((ft_strchr("xX", parg.type) && ft_strchr(parg.flags, '#'))
 		|| parg.type == 'p')
 		return (conv_ptr(fd, parg, ap));
-	else if (ft_strchr("uUxXoOb", parg.type))
+	else if (ft_strchr("uUxXoO", parg.type))
 		return (conv_uint(fd, parg, ap));
 	return (0);
 }
