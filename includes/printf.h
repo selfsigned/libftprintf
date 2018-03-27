@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 17:57:28 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/26 01:26:06 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 15:38:54 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # include <wchar.h>
 
 # define CONV_LST "sSpdDioOuUxXcC%b"
+
+# define B_BIN "01"
+# define B_OCT "01234567"
+# define B_DEC "0123456789"
+# define B_HEX_U "0123456789ABCDEF"
+# define B_HEX_L "0123456789abcdef"
 
 /*
 ** printf is a variadic function (look it up on google)
