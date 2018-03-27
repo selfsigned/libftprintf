@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 13:42:25 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/27 02:47:51 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 20:20:25 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,22 @@ static	size_t	conv_uchar(int fd, t_parg parg, va_list ap)
 {
 	unsigned char	u[4];
 	size_t			w;
+	size_t			i;
 
-	(void)parg.type;
 	w = conv_unicode(u, va_arg(ap, wchar_t));
-	write(fd, u, w);
-	return(w);
+	i = w;
+	if (ft_strchr(parg.flags, '-'))
+		write(fd, u, w);
+	parg.width -= w;
+	while (parg.width > 0)
+	{
+		parg.width--;
+		ft_putchar_fd((ft_strchr(parg.flags, '0')) ? '0' : ' ', fd);
+		i++;
+	}
+	if (!ft_strchr(parg.flags, '-'))
+		write(fd, u, w);
+	return (i);
 }
 
 size_t			conv_char(int fd, t_parg parg, va_list ap)
