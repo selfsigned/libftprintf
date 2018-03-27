@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 13:42:25 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/26 01:28:44 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 02:47:51 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 static	size_t	conv_uchar(int fd, t_parg parg, va_list ap)
 {
-	unsigned int c;
+	unsigned char	u[4];
+	size_t			w;
 
-	c = va_arg(ap, wchar_t);
 	(void)parg.type;
-	/* ft_putstr_fd("unicode goes here", fd); */
-	write(fd, &c, 4);
-	return (42);
+	w = conv_unicode(u, va_arg(ap, wchar_t));
+	write(fd, u, w);
+	return(w);
 }
 
 size_t			conv_char(int fd, t_parg parg, va_list ap)

@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 15:07:29 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/20 19:29:53 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/27 02:47:13 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 intmax_t	conv_t_int(t_parg parg, va_list ap);
 uintmax_t	conv_t_uint(t_parg parg, va_list ap);
 
+size_t		conv_unicode(unsigned char *dst, unsigned int src);
 size_t		conv_char(int fd, t_parg parg, va_list ap);
 size_t		conv_string(int fd, t_parg parg, va_list ap);
 size_t		conv_int(int fd, t_parg parg, va_list ap);
