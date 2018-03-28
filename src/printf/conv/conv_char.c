@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 13:42:25 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/28 15:29:29 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/28 21:18:13 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ size_t			conv_char(int fd, t_parg parg, va_list ap)
 
 	i = 1;
 	if (parg.type == 'C' || parg.length == l)
-			return(conv_uchar(fd, parg, ap));
+		return (conv_uchar(fd, parg, ap));
 	c = (parg.type == '%') ? parg.type : va_arg(ap, int);
 	if (ft_strchr(parg.flags, '-'))
 		ft_putchar_fd(c, fd);
