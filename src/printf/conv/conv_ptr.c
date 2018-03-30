@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/31 00:40:44 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/30 22:36:41 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	size_t		l_print(int fd, char *str, t_parg parg)
 		ft_putchar_fd('0', fd);
 		i++;
 	}
-	(str) ? ft_putstr_fd(str, fd) : (void)42;
+	ft_putstr_fd(str, fd);
 	return (i);
 }
 
@@ -63,7 +63,7 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 
 	(parg.type == 'X') ? ft_putstr_fd("0x", fd) : ft_putstr_fd("0x", fd);
 	w = ft_strlen(str);
-	i = (parg.prec > (int)w + 2 && !ft_strchr(parg.flags, '-')) ? w : w + 2;
+	i = (parg.prec > (int)w + 2) ? w : w + 2;
 	size = (parg.prec > (int)w) ? parg.prec : (int)w;
 	tmp = size + 2;
 	while (size-- - w > 0)
@@ -71,7 +71,7 @@ static	size_t		r_print(int fd, char *str, t_parg parg)
 		ft_putchar_fd('0', fd);
 		i++;
 	}
-	(str) ? ft_putstr_fd(str, fd): (void)42;
+	ft_putstr_fd(str, fd);
 	while (parg.width-- - tmp > 0)
 	{
 		ft_putchar_fd(' ', fd);
@@ -89,7 +89,7 @@ static	size_t		null_hexa_prec(int fd, uintmax_t n, t_parg parg)
 {
 	char	*str;
 
-	str = (parg.prec || parg.width == -42) ? ft_strdup("0") : ft_strdup("\0");
+	str = (parg.prec) ? ft_strdup("0") : ft_strdup("\0");
 	if (!ft_strchr(parg.flags, '-'))
 		n = uint_l_print(fd, str, parg);
 	else
@@ -116,8 +116,7 @@ size_t				conv_ptr(int fd, t_parg parg, va_list ap)
 	{
 		parg.prec = ((parg.type == 'x' || parg.type == 'X') && !n) ? parg.width
 			: parg.width - 2;
-		parg.width = -42;
-		/* parg.width = 0; */
+		parg.width = 0;
 	}
 	if ((parg.type == 'x' || parg.type == 'X') && !n)
 		return (null_hexa_prec(fd, n, parg));

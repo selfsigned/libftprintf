@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/31 00:05:34 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/30 18:51:52 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ size_t		uint_l_print(int fd, char *str, t_parg parg)
 		ft_putchar_fd('0', fd);
 		i++;
 	}
-	(str) ? ft_putstr_fd(str, fd) : (void)42;
+	ft_putstr_fd(str, fd);
 	free(str);
 	return (i);
 }
@@ -69,7 +69,7 @@ size_t		uint_r_print(int fd, char *str, t_parg parg)
 		ft_putchar_fd('0', fd);
 		i++;
 	}
-	(str) ? ft_putstr_fd(str, fd) : (void)42;
+	ft_putstr_fd(str, fd);
 	while (parg.width-- - tmp > 0)
 	{
 		ft_putchar_fd(' ', fd);

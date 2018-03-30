@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:41:49 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/30 23:58:57 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/20 20:12:23 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int				ft_vdprintf(int fd, const char *format, va_list ap)
 		}
 		else
 		{
-			if (*format + i)
-				write(fd, format + i, 1);
+			write(fd, format + i, 1);
 			i++;
 			res += 1;
 		}
