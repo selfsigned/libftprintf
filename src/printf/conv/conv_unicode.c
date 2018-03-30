@@ -6,28 +6,29 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 01:11:32 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/27 21:55:35 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/30 20:41:35 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+#include <stdlib.h>
 
 size_t	conv_unicode(unsigned char *d, unsigned int n)
 {
 	/* ft_printf("binary input: %b\n", n); */
-	if (n <= 0x7F)
+	if (n <= 0x7F || MB_CUR_MAX <= 1)
 	{
 		d[0] = n;
 		return (1);
 	}
-	else if (n <= 0x7FF)
+	else if (n <= 0x7FF || MB_CUR_MAX == 2)
 	{
 		d[0] = (n >> 6) + 0xC0;
 		d[1] = (n & 0x3F) + 0x80;
 		/* ft_printf("binary output result: %b %b\n", d[0], d[1]); */
 		return (2);
 	}
-	else if (n <= 0xFFFF)
+	else if (n <= 0xFFFF || MB_CUR_MAX == 3)
 	{
 		d[0] = (n >> 12) + 0xE0;
 		d[1] = ((n >> 6) & 0x3F) + 0x80;
