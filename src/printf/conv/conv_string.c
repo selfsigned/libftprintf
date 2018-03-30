@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 19:54:58 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/29 19:40:25 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/30 13:37:27 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static size_t	conv_ustring(int fd, t_parg parg, va_list ap)
 	i = 0;
 	u = va_arg(ap, wchar_t*);
 	d = wstrlen((u) ? u : L"(null)");
-	parg.prec = (parg.prec < 0 || d < (size_t)parg.prec) ? d : parg.prec;
+	parg.prec = (parg.prec < 0 || d < (size_t)parg.prec) ? (int)d : parg.prec;
 	/* ft_printf("prec: %d width: %d\n", parg.prec, parg.width); */
 	if (ft_strchr(parg.flags, '-'))
 		i = putwstrn(u, parg.prec, parg.width, fd);

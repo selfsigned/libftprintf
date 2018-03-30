@@ -12,8 +12,8 @@ int		main(int ac, char **av)
 	if (ac != 3)
 		return (1);
 	setlocale(LC_ALL, "");
-	res = ft_printf(av[1], ft_atoi(av[2]));
+	res = ft_printf(av[1], atoll(av[2]));
 	ft_putchar('\n');
-	res2 = printf(av[1], ft_atoi(av[2]));
+	res2 = printf(av[1], atoll(av[2]));
 	printf("\nft_printf output: %d printf output: %d", res, res2);
 }
