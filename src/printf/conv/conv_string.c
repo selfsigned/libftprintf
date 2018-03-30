@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 19:54:58 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/30 13:37:27 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/30 17:46:51 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static size_t	putwstrn(wchar_t *s, size_t n, size_t p, int fd)
 		write(fd, "(null)", n);
 		return (n);
 	}
-	if (conv_unicode(c, *s) > n)
-	{
-		while (i++ < p)
-			ft_putchar_fd(' ', fd);
-		return (p);
-	}
+	/* if (conv_unicode(c, *s) > n) */
+	/* { */
+	/* 	while (i++ < p) */
+	/* 		ft_putchar_fd(' ', fd); */
+	/* 	return (p); */
+	/* } */
 	while (*s && i < n)
 	{
 		clen = conv_unicode(c, *s++);
