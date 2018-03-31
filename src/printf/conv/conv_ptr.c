@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 23:38:35 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/30 22:36:41 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:42:11 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ static	size_t		null_hexa_prec(int fd, uintmax_t n, t_parg parg)
 {
 	char	*str;
 
-	str = (parg.prec) ? ft_strdup("0") : ft_strdup("\0");
+	str = (parg.prec || (parg.prec <= 0 && ft_strchr(parg.flags, '0')))
+		? ft_strdup("0") : ft_strdup("\0");
 	if (!ft_strchr(parg.flags, '-'))
 		n = uint_l_print(fd, str, parg);
 	else
