@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 19:54:58 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/30 17:46:51 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:08:51 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ static size_t	putwstrn(wchar_t *s, size_t n, size_t p, int fd)
 		write(fd, "(null)", n);
 		return (n);
 	}
-	/* if (conv_unicode(c, *s) > n) */
-	/* { */
-	/* 	while (i++ < p) */
-	/* 		ft_putchar_fd(' ', fd); */
-	/* 	return (p); */
-	/* } */
 	while (*s && i < n)
 	{
 		clen = conv_unicode(c, *s++);
@@ -64,7 +58,6 @@ static size_t	conv_ustring(int fd, t_parg parg, va_list ap)
 	u = va_arg(ap, wchar_t*);
 	d = wstrlen((u) ? u : L"(null)");
 	parg.prec = (parg.prec < 0 || d < (size_t)parg.prec) ? (int)d : parg.prec;
-	/* ft_printf("prec: %d width: %d\n", parg.prec, parg.width); */
 	if (ft_strchr(parg.flags, '-'))
 		i = putwstrn(u, parg.prec, parg.width, fd);
 	while (parg.width - parg.prec > 0)
