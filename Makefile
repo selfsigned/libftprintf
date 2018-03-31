@@ -15,7 +15,7 @@ NAME = libftprintf.a
 SONAME = $(NAME:.a=.so)
 DNAME = $(NAME)
 # CC = clang
-CFLAGS = -Wall -Wextra -Wpedantic
+CFLAGS = -Wall -Wextra -Werror
 INCDIR = includes
 PRINTFINC = printf.h printf_structs.h printf_conv.h
 INCFILES = libft.h get_next_line.h $(PRINTFINC)
