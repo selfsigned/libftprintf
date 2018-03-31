@@ -15,7 +15,7 @@ NAME = libftprintf.a
 SONAME = $(NAME:.a=.so)
 DNAME = $(NAME)
 # CC = clang
-CFLAGS = -Wall -Wextra -Wpedantic -g
+CFLAGS = -Wall -Wextra -Wpedantic
 INCDIR = includes
 #PRINTFINC = printf.h printf_structs.h printf_helpers.h printf_conv.h
 INCFILES = libft.h get_next_line.h #$(PRINTFINC)
@@ -77,7 +77,7 @@ AIGHT=\033[1;33m
 WARN=\033[1;31m
 NOCOLOR=\033[0m
 
-.PHONY: all so clean fclean re test moulitest
+.PHONY: all so clean fclean re test moulitest_libft
 
 all: $(NAME)
 

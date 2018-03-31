@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 19:54:58 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/31 16:08:51 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:51:37 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	wstrlen(wchar_t *s)
 	return (l);
 }
 
-static size_t	putwstrn(wchar_t *s, size_t n, size_t p, int fd)
+static size_t	putwstrn(wchar_t *s, size_t n, int fd)
 {
 	size_t			i;
 	size_t			clen;
@@ -59,7 +59,7 @@ static size_t	conv_ustring(int fd, t_parg parg, va_list ap)
 	d = wstrlen((u) ? u : L"(null)");
 	parg.prec = (parg.prec < 0 || d < (size_t)parg.prec) ? (int)d : parg.prec;
 	if (ft_strchr(parg.flags, '-'))
-		i = putwstrn(u, parg.prec, parg.width, fd);
+		i = putwstrn(u, parg.prec, fd);
 	while (parg.width - parg.prec > 0)
 	{
 		parg.width--;
@@ -67,7 +67,7 @@ static size_t	conv_ustring(int fd, t_parg parg, va_list ap)
 		i++;
 	}
 	if (!ft_strchr(parg.flags, '-'))
-		i += putwstrn(u, parg.prec, parg.width + 1, fd);
+		i += putwstrn(u, parg.prec, fd);
 	return (i);
 }
 

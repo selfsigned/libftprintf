@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 01:56:57 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/20 20:03:48 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/31 16:49:42 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef	enum	e_length
 
 typedef struct	s_parg
 {
-	char		flags[5];
+	char		flags[6];
 	int			width;
 	int			prec;
 	t_length	length;
