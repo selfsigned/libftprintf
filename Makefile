@@ -17,8 +17,8 @@ DNAME = $(NAME)
 # CC = clang
 CFLAGS = -Wall -Wextra -Wpedantic
 INCDIR = includes
-#PRINTFINC = printf.h printf_structs.h printf_helpers.h printf_conv.h
-INCFILES = libft.h get_next_line.h #$(PRINTFINC)
+PRINTFINC = printf.h printf_structs.h printf_conv.h
+INCFILES = libft.h get_next_line.h $(PRINTFINC)
 INCFULL = $(addprefix $(INCDIR)/, $(INCFILES))
 INC = $(addprefix -I, $(INCDIR))
 SRCDIR = src
@@ -62,7 +62,8 @@ PRINTFP = $(SRCDIR)/printf
 PRINTFDIR = $(PRINTFP)/function:$(PRINTFP)/parse $(PRINTFP)/conv
 PRINTF_FUN = ft_printf.c ft_dprintf.c ft_vprintf.c ft_vdprintf.c
 PRINTF_PARSE = readarg.c printarg.c
-PRINTF_CONV = conv_t.c conv_char.c conv_string.c conv_int.c conv_uint.c conv_ptr.c conv_unicode.c
+PRINTF_CONV = conv_t.c conv_char.c conv_string.c \
+	      conv_int.c conv_uint.c conv_ptr.c conv_unicode.c
 PRINTF = $(PRINTF_FUN) $(PRINTF_PARSE) $(PRINTF_CONV)
 
 OBJDIR = obj

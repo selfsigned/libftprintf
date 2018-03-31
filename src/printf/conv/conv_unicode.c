@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 01:11:32 by xperrin           #+#    #+#             */
-/*   Updated: 2018/03/31 16:03:24 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/03/31 21:53:54 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static	size_t	utf_threeb_range(unsigned char *d, unsigned int n)
 
 static	size_t	utf_fourb_range(unsigned char *d, unsigned int n)
 {
-	d[0] = (n >> 17) + 0xF0;
+	d[0] = (n >> 16) + 0xF0;
 	d[1] = ((n >> 12) & 0x3F) + 0x80;
 	d[2] = ((n >> 6) & 0x3F) + 0x80;
 	d[3] = (n & 0x3F) + 0x80;
