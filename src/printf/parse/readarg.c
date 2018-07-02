@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:57:10 by xperrin           #+#    #+#             */
-/*   Updated: 2018/05/27 01:03:26 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/07/02 07:49:44 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ static	size_t		p_flags(const char *fmt, t_parg *parg)
 			parg->flags[i] = fmt[i];
 		i++;
 	}
+	parg->flags[5] = '\0';
 	return (i);
 }
-
-/*
-** Parsers
-*/
 
 static	size_t		p_length(const char *fmt, t_parg *parg)
 {
@@ -53,14 +50,31 @@ static	size_t		p_length(const char *fmt, t_parg *parg)
 	return (0);
 }
 
+static	size_t		p_width_prec(char o, const char *fmt, t_parg *parg,
+								va_list ap)
+{
+	size_t	i;
+
+	(void)ap;
+	i = 0;
+	if (o == 'w')
+		parg->width = ft_atoi(fmt);
+	else
+		parg->prec = ft_atoi(fmt);
+	while (ft_isdigit(fmt[i]))
+		i++;
+	return (i);
+}
+
+
 /*
 ** Printf string syntax:
 **  %[flags][width][.precision][length]type
 **
-**  TBD: - error handling in precision
+**  TODO: - dynamic precision
 */
 
-t_parg				printf_readarg(size_t i, const char *fmt)
+t_parg				printf_readarg(size_t i, const char *fmt, va_list ap)
 {
 	t_parg	parg;
 
@@ -69,17 +83,10 @@ t_parg				printf_readarg(size_t i, const char *fmt)
 	i += p_flags(fmt + i, &parg);
 	parg.width = 0;
 	if (ft_isdigit(fmt[i]))
-	{
-		parg.width = ft_atoi(fmt + i);
-		i += ft_cntdigit(parg.width);
-	}
+		i += p_width_prec('w', fmt + i, &parg, ap);
 	parg.prec = -1;
 	if (fmt[i] == '.')
-	{
-		parg.prec = ft_atoi(fmt + i++ + 1);
-		while (ft_isdigit(fmt[i]))
-			i++;
-	}
+		i += p_width_prec('p', fmt + i + 1, &parg, ap) + 1;
 	i += p_length(fmt + i, &parg);
 	if (ft_isalnum(fmt[i]) || fmt[i] == '%')
 		parg.type = fmt[i++];
