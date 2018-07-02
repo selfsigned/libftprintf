@@ -6,7 +6,7 @@
 /*   By: xperrin <xperrin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:57:10 by xperrin           #+#    #+#             */
-/*   Updated: 2018/07/02 07:49:44 by xperrin          ###   ########.fr       */
+/*   Updated: 2018/07/02 08:11:49 by xperrin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,30 @@ static	size_t		p_length(const char *fmt, t_parg *parg)
 }
 
 static	size_t		p_width_prec(char o, const char *fmt, t_parg *parg,
-								va_list ap)
+						va_list ap)
 {
 	size_t	i;
+	int		r;
 
-	(void)ap;
 	i = 0;
-	if (o == 'w')
-		parg->width = ft_atoi(fmt);
+	r = -1;
+	if (fmt[i] == '*')
+		r = va_arg(ap, int);
 	else
-		parg->prec = ft_atoi(fmt);
-	while (ft_isdigit(fmt[i]))
-		i++;
-	return (i);
+	{
+		while (ft_isdigit(fmt[i]))
+			i++;
+	}
+	if (o == 'w')
+		parg->width = (r >= 0) ? r : ft_atoi(fmt);
+	else
+		parg->prec = (r >= 0) ? r : ft_atoi(fmt);
+	return ((fmt[0] == '*') ? 1 : i);
 }
-
 
 /*
 ** Printf string syntax:
 **  %[flags][width][.precision][length]type
-**
-**  TODO: - dynamic precision
 */
 
 t_parg				printf_readarg(size_t i, const char *fmt, va_list ap)
@@ -82,7 +85,7 @@ t_parg				printf_readarg(size_t i, const char *fmt, va_list ap)
 	parg.convlen = i;
 	i += p_flags(fmt + i, &parg);
 	parg.width = 0;
-	if (ft_isdigit(fmt[i]))
+	if (ft_isdigit(fmt[i]) || fmt[i] == '*')
 		i += p_width_prec('w', fmt + i, &parg, ap);
 	parg.prec = -1;
 	if (fmt[i] == '.')
